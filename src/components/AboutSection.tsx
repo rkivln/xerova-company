@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+
+
 const timeline = [
   { year: "2019", title: "Founded", desc: "Xerova Digital Services launched with a vision for premium digital solutions." },
   { year: "2020", title: "Growth", desc: "Expanded to serve 50+ clients across multiple industries and launched R&D division." },
