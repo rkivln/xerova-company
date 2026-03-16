@@ -106,28 +106,28 @@ export default function ContactSection() {
               <Mail className="w-6 h-6 text-primary shrink-0 mt-1" />
               <div>
                 <h4 className="font-display text-sm font-semibold text-foreground">Email</h4>
-                <p className="text-muted-foreground text-sm">hello@xerova.digital</p>
+                <p className="text-muted-foreground text-sm">xerovadigitalsolutions@gmail.com</p>
               </div>
             </div>
             <div className="glass-card p-6 flex items-start gap-4">
               <Phone className="w-6 h-6 text-primary shrink-0 mt-1" />
               <div>
                 <h4 className="font-display text-sm font-semibold text-foreground">Phone</h4>
-                <p className="text-muted-foreground text-sm">+1 (555) 123-4567</p>
+                <p className="text-muted-foreground text-sm">+19 81480 80318</p>
               </div>
             </div>
             <div className="glass-card p-6 flex items-start gap-4">
               <MapPin className="w-6 h-6 text-primary shrink-0 mt-1" />
               <div>
                 <h4 className="font-display text-sm font-semibold text-foreground">Location</h4>
-                <p className="text-muted-foreground text-sm">Innovation District, Tech City</p>
+                <p className="text-muted-foreground text-sm">Pondicherry</p>
               </div>
             </div>
 
             <div className="glass-card overflow-hidden rounded-xl h-48">
               <iframe
                 title="Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30596698663!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s"
+                src="https://maps.app.goo.gl/qdSed8AN2HpYpJSy7"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
