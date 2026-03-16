@@ -1,6 +1,11 @@
-import { Twitter, Github, Linkedin, Instagram } from "lucide-react";
+import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
 
-
+const socials = [
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: "#", label: "GitHub" },
+]
 export default function Footer() {
   return (
     <footer className="border-t border-border py-12">
