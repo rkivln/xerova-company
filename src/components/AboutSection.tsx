@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 
 
 const stats = [
-  { label: "Projects Completed", value: 200 },
-  { label: "Happy Clients", value: 120 },
-  { label: "Team Members", value: 35 },
-  { label: "Countries", value: 15 },
+  { label: "Projects Completed", value: 50 },
+  { label: "Happy Clients", value: 10 },
+  { label: "Team Members", value: 15 },
+
 ];
 
 function AnimatedCounter({ value }: { value: number }) {
