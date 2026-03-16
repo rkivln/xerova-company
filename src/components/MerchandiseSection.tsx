@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Shirt, ShoppingBag as BagIcon, Package, Tag } from "lucide-react";
 
 const products = [
-  { icon: Shirt, title: "Custom T-Shirts and other products", desc: "Premium quality printing with vibrant colors and durable finishes" },
+  { icon: Shirt, title: "Custom T-Shirts and other customisable products", desc: "Premium quality printing with vibrant colors and durable finishes" },
   { icon: BagIcon, title: "Branded Bags", desc: "Tote bags, drawstring bags, and laptop bags with your branding" },
   { icon: Package, title: "Hoodies & Apparel", desc: "Custom hoodies, jackets, and uniforms for teams and events" },
   { icon: Tag, title: "Promo Merchandise", desc: "Mugs, pens, stickers, and promotional items for brand awareness" },
