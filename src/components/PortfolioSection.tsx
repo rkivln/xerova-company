@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const projects = [
-  { title: "NexGen E-Commerce", category: "Web Development", color: "from-neon-cyan/20 to-neon-purple/20", },
+  { title: "NexGen E-Commerce", category: "Web Development", color: "from-neon-cyan/20 to-neon-purple/20", href="feedback.html"},
   { title: "Pulse Brand Identity", category: "Creative Design", color: "from-neon-purple/20 to-pink-500/20" },
   { title: "Orbit Social Campaign", category: "Digital Marketing", color: "from-neon-cyan/20 to-blue-500/20" },
   { title: "Synthwave App UI", category: "UI/UX Design", color: "from-violet-500/20 to-neon-purple/20" },
