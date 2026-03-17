@@ -113,7 +113,7 @@ export default function ContactSection() {
               <Phone className="w-6 h-6 text-primary shrink-0 mt-1" />
               <div>
                 <h4 className="font-display text-sm font-semibold text-foreground">Phone</h4>
-                <p className="text-muted-foreground text-sm">+19 81480 80318</p>
+                <p className="text-muted-foreground text-sm">+91 89252 79981</p>
               </div>
             </div>
             <div className="glass-card p-6 flex items-start gap-4">
