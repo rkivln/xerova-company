@@ -1,787 +1,1196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xerova Media Production | Premium Production & Content Creation</title>
-    <link rel="icon" type="image/png" href="./favicon.png">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-deep: #0a0d1a;
-            --card-bg: #111827;
-            --cyan: #00f5d4;
-            --purple: #9b5de5;
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --gradient: linear-gradient(135deg, var(--cyan), var(--purple));
-            --glass: rgba(17, 24, 39, 0.7);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xerova Digital — Media Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #0a0d1a;
+  --bg2:    #0d1120;
+  --bg3:    #111827;
+  --card:   rgba(13,17,32,0.95);
+  --card2:  rgba(17,24,39,0.85);
+  --cyan:   #00f5d4;
+  --cyan2:  #00c4aa;
+  --purple: #9b5de5;
+  --pink:   #f72585;
+  --green:  #00e676;
+  --amber:  #ffd60a;
+  --text:   #e2e8f0;
+  --text2:  #94a3b8;
+  --muted:  #4a5568;
+  --border: rgba(0,245,212,0.12);
+  --border2:#1e2d42;
+  --fd: 'Orbitron', monospace;
+  --fu: 'Exo 2', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);overflow-x:hidden}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+/* CANVAS */
+#bgc{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
 
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  background:rgba(10,13,26,.75);backdrop-filter:blur(20px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+nav.sc{border-bottom:1px solid rgba(0,245,212,.18)}
+.logo{font-family:var(--fd);font-size:1rem;font-weight:700;letter-spacing:.06em;display:flex;align-items:center;gap:.45rem}
+.la{color:var(--cyan)}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:dp 2s ease infinite}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.2}}
+.lsub{color:var(--text);font-weight:400}
+.nl{display:flex;gap:1.8rem;list-style:none}
+.nl a{color:var(--text2);text-decoration:none;font-family:var(--fu);font-size:.82rem;letter-spacing:.05em;transition:color .2s}
+.nl a:hover,.nl a.active{color:var(--cyan)}
+.ncta{border:1px solid var(--cyan);color:var(--cyan);background:transparent;padding:.42rem 1.1rem;border-radius:4px;font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.14em;cursor:pointer;transition:all .3s}
+.ncta:hover{background:rgba(0,245,212,.08);box-shadow:0 0 20px rgba(0,245,212,.3)}
 
-        h1, h2, h3, .nav-logo, .stat-number, .btn-text {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+/* HERO */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 1.5rem 60px;overflow:hidden;
+}
+.hero-film{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+  pointer-events:none;z-index:1;
+}
+.hero-glow{
+  position:absolute;top:20%;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,245,212,.06) 0%,rgba(155,93,229,.04) 40%,transparent 70%);
+  pointer-events:none;z-index:1;animation:hgPulse 5s ease infinite;
+}
+@keyframes hgPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.1)}}
+.hero-badge{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(0,245,212,.25);border-radius:100px;
+  padding:.35rem 1.1rem;
+  font-family:var(--fu);font-size:.72rem;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;
+  background:rgba(0,245,212,.04);margin-bottom:1.8rem;
+  animation:fadeUp .8s ease both;
+}
+.hb-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:dp 1.5s ease infinite}
+.hero h1{
+  position:relative;z-index:2;
+  font-family:var(--fd);font-size:clamp(2rem,5.5vw,4rem);font-weight:900;line-height:1.1;
+  margin-bottom:1.2rem;
+  animation:fadeUp .8s .15s ease both;
+}
+.hero h1 em{font-style:normal}
+.grad{
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:gf 5s ease infinite;
+}
+@keyframes gf{0%,100%{background-position:0%}50%{background-position:100%}}
+.hero p{
+  position:relative;z-index:2;
+  color:var(--text2);font-size:1rem;max-width:580px;margin:0 auto 2.5rem;line-height:1.8;
+  animation:fadeUp .8s .3s ease both;
+}
+.hero-btns{
+  position:relative;z-index:2;
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:3rem;animation:fadeUp .8s .45s ease both;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  border:none;color:var(--bg);font-family:var(--fd);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  padding:.8rem 2rem;border-radius:6px;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;
+}
+.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .4s}
+.btn-primary:hover{box-shadow:0 0 30px rgba(0,245,212,.4);transform:translateY(-2px)}
+.btn-primary:hover::after{left:100%}
+.btn-outline{
+  border:1px solid var(--cyan);color:var(--cyan);background:transparent;
+  font-family:var(--fd);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  padding:.8rem 2rem;border-radius:6px;cursor:pointer;transition:all .3s;
+}
+.btn-outline:hover{background:rgba(0,245,212,.08);box-shadow:0 0 20px rgba(0,245,212,.25)}
+.hero-stats{
+  position:relative;z-index:2;
+  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .8s .6s ease both;
+}
+.hstat{text-align:center}
+.hstat-num{font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--cyan);line-height:1}
+.hstat-label{font-family:var(--fu);font-size:.72rem;color:var(--muted);margin-top:.25rem;letter-spacing:.05em}
+.stat-sep{width:1px;background:var(--border2);align-self:stretch}
+/* scroll indicator */
+.scroll-ind{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  animation:fadeUp .8s .8s ease both;
+}
+.scroll-ind span{font-family:var(--fu);font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Background Decorations */
-        .particle-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(var(--cyan) 1px, transparent 1px);
-            background-size: 60px 60px;
-            opacity: 0.08;
-            z-index: -1;
-            pointer-events: none;
-        }
+/* SECTION WRAPPER */
+section{position:relative;z-index:1}
+.sec-inner{max-width:1140px;margin:0 auto;padding:0 1.5rem}
+.sec-label{font-family:var(--fu);font-size:.72rem;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:.6rem}
+.sec-title{font-family:var(--fd);font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
+.sec-sub{color:var(--text2);font-size:.95rem;line-height:1.75;max-width:560px}
+.sec-rule{width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:100px;margin:1.2rem 0 0}
 
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.2rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 13, 26, 0.85);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 245, 212, 0.1);
-        }
+/* SERVICES SECTION */
+.services-sec{padding:100px 0}
+.services-sec .sec-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.services-left{}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0}
+.srv-card{
+  background:var(--card2);border:1px solid var(--border2);border-radius:14px;
+  padding:1.4rem;cursor:pointer;transition:all .35s;position:relative;overflow:hidden;
+}
+.srv-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;opacity:0;
+  background:radial-gradient(circle at 50% 0%,rgba(0,245,212,.08),transparent 70%);
+  transition:opacity .35s;
+}
+.srv-card:hover{border-color:rgba(0,245,212,.35);transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.srv-card:hover::before{opacity:1}
+.srv-icon{font-size:1.8rem;margin-bottom:.75rem;display:block}
+.srv-name{font-family:var(--fd);font-size:.78rem;font-weight:700;color:var(--text);letter-spacing:.04em;margin-bottom:.4rem}
+.srv-desc{font-size:.78rem;color:var(--text2);line-height:1.55}
+.srv-arrow{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-family:var(--fu);font-size:.72rem;color:var(--cyan);margin-top:.6rem;
+  transition:gap .2s;
+}
+.srv-card:hover .srv-arrow{gap:.6rem}
 
-        .nav-logo { font-size: 1.4rem; font-weight: 900; color: #fff; text-decoration: none; }
-        .nav-logo span { color: var(--cyan); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.85rem; transition: var(--transition); }
-        .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+/* PROCESS SECTION */
+.process-sec{padding:90px 0;background:linear-gradient(180deg,transparent,rgba(0,245,212,.02) 50%,transparent)}
+.process-sec .sec-inner{text-align:center}
+.process-sec .sec-sub{margin:0 auto}
+.process-track{
+  display:flex;align-items:flex-start;justify-content:center;
+  gap:0;margin-top:3.5rem;position:relative;
+  overflow-x:auto;padding-bottom:1rem;
+}
+.process-track::before{
+  content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border2) 20%,var(--border2) 80%,transparent);
+  z-index:0;
+}
+.proc-step{
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;min-width:120px;max-width:160px;position:relative;z-index:1;
+  padding:0 .5rem;
+}
+.proc-node{
+  width:56px;height:56px;border-radius:50%;
+  border:2px solid var(--border2);background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:1rem;
+  transition:all .4s;position:relative;
+}
+.proc-node::after{
+  content:attr(data-n);
+  position:absolute;top:-8px;right:-8px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border2);
+  font-family:var(--fd);font-size:.55rem;font-weight:700;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+}
+.proc-step.vis .proc-node{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,245,212,.3)}
+.proc-step.vis .proc-node::after{border-color:var(--cyan);color:var(--cyan)}
+.proc-title{font-family:var(--fd);font-size:.68rem;font-weight:700;color:var(--text);letter-spacing:.04em;margin-bottom:.3rem;text-align:center}
+.proc-desc{font-size:.72rem;color:var(--text2);text-align:center;line-height:1.5}
 
-        /* Buttons */
-        .btn-gradient {
-            padding: 0.8rem 1.8rem;
-            background: var(--gradient);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
-            display: inline-block;
-        }
+/* PORTFOLIO */
+.portfolio-sec{padding:90px 0}
+.portfolio-sec .sec-inner>div:first-child{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:1rem}
+.bcard{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:14px;
+  overflow:hidden;position:relative;cursor:pointer;transition:all .35s;
+}
+.bcard:hover{border-color:rgba(0,245,212,.3);box-shadow:0 15px 50px rgba(0,0,0,.4)}
+.bc1{grid-column:span 7;grid-row:span 2;min-height:340px}
+.bc2{grid-column:span 5;min-height:160px}
+.bc3{grid-column:span 5;min-height:160px}
+.bc4{grid-column:span 4;min-height:200px}
+.bc5{grid-column:span 4;min-height:200px}
+.bc6{grid-column:span 4;min-height:200px}
+.bcard-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;opacity:.07;transition:opacity .35s;
+  filter:blur(1px);
+}
+.bcard:hover .bcard-bg{opacity:.12}
+.bcard-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,245,212,.04),rgba(155,93,229,.04));
+  opacity:0;transition:opacity .35s;
+}
+.bcard:hover .bcard-grad{opacity:1}
+.bcard-content{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.4rem;
+}
+.bcard-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,13,26,.9) 0%,transparent 60%);
+}
+.bcard-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem;position:relative;z-index:2}
+.btag{
+  background:rgba(0,245,212,.1);border:1px solid rgba(0,245,212,.2);
+  color:var(--cyan);font-family:var(--fu);font-size:.62rem;letter-spacing:.06em;
+  padding:.15rem .5rem;border-radius:4px;
+}
+.btag.purple{background:rgba(155,93,229,.1);border-color:rgba(155,93,229,.2);color:var(--purple)}
+.btag.pink{background:rgba(247,37,133,.1);border-color:rgba(247,37,133,.2);color:var(--pink)}
+.bcard-title{font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--text);position:relative;z-index:2;margin-bottom:.2rem}
+.bcard-meta{font-size:.75rem;color:var(--text2);position:relative;z-index:2}
+.bcard-hover{
+  position:absolute;inset:0;
+  background:rgba(10,13,26,.88);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  opacity:0;transition:opacity .3s;padding:1.5rem;text-align:center;
+}
+.bcard:hover .bcard-hover{opacity:1}
+.bcard-hover h4{font-family:var(--fd);font-size:.82rem;font-weight:700;color:var(--cyan);margin-bottom:.5rem}
+.bcard-hover p{font-size:.75rem;color:var(--text2);line-height:1.55;margin-bottom:.8rem}
+.bcard-hover-btn{
+  border:1px solid var(--cyan);color:var(--cyan);background:transparent;
+  font-family:var(--fu);font-size:.72rem;padding:.35rem .9rem;border-radius:4px;cursor:pointer;
+  transition:all .2s;
+}
+.bcard-hover-btn:hover{background:rgba(0,245,212,.1)}
 
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(155, 93, 229, 0.5);
-        }
+/* EQUIPMENT */
+.equipment-sec{padding:80px 0;overflow:hidden}
+.eq-label{font-family:var(--fu);font-size:.72rem;letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;text-align:center;margin-bottom:.6rem}
+.eq-title{font-family:var(--fd);font-size:clamp(1.4rem,3vw,2rem);font-weight:700;text-align:center;margin-bottom:.5rem}
+.eq-sub{font-size:.88rem;color:var(--text2);text-align:center;margin-bottom:2.5rem}
+.marquee-wrap{overflow:hidden;position:relative}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.marquee-track{display:flex;gap:.75rem;width:max-content;margin-bottom:.75rem}
+.marquee-track.r1{animation:mq 35s linear infinite}
+.marquee-track.r2{animation:mq2 30s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mq2{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.eq-pill{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--bg3);border:1px solid var(--border2);border-radius:8px;
+  padding:.5rem 1rem;white-space:nowrap;flex-shrink:0;
+  font-family:var(--fu);font-size:.78rem;color:var(--text2);
+  transition:all .2s;
+}
+.eq-pill:hover{border-color:rgba(0,245,212,.3);color:var(--cyan)}
+.eq-pill span{font-size:1rem}
 
-        .btn-outline {
-            padding: 0.8rem 1.8rem;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: var(--transition);
-            background: transparent;
-        }
+/* PACKAGES */
+.packages-sec{padding:90px 0}
+.packages-sec .sec-inner>div:first-child{text-align:center;margin-bottom:3rem}
+.packages-sec .sec-sub{margin:0 auto}
+.packages-sec .sec-rule{margin:1.2rem auto 0}
+.pkg-toggle{
+  display:flex;justify-content:center;align-items:center;gap:1rem;margin-bottom:3rem;
+}
+.pkg-toggle span{font-family:var(--fu);font-size:.82rem;color:var(--text2)}
+.pkg-toggle span.on{color:var(--cyan)}
+.toggle-sw{width:44px;height:24px;background:var(--border2);border-radius:100px;cursor:pointer;position:relative;transition:background .3s}
+.toggle-sw.on{background:var(--cyan)}
+.toggle-sw::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:white;border-radius:50%;transition:left .3s}
+.toggle-sw.on::after{left:22px}
+.save-badge{background:rgba(0,245,212,.12);border:1px solid rgba(0,245,212,.25);color:var(--cyan);font-family:var(--fu);font-size:.65rem;padding:.18rem .5rem;border-radius:4px}
+.pkgs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.pkg-card{
+  background:var(--card2);border:1px solid var(--border2);border-radius:18px;
+  padding:2rem 1.6rem;position:relative;transition:all .35s;
+}
+.pkg-card.featured{
+  border-color:var(--cyan);background:rgba(0,245,212,.04);
+  transform:scale(1.03);
+  box-shadow:0 0 50px rgba(0,245,212,.1),0 20px 60px rgba(0,0,0,.4);
+}
+.pkg-card:hover:not(.featured){border-color:rgba(0,245,212,.3);transform:translateY(-4px)}
+.pkg-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  color:var(--bg);font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.1em;
+  padding:.28rem .8rem;border-radius:100px;white-space:nowrap;
+}
+.pkg-name{font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.pkg-tagline{font-size:.78rem;color:var(--text2);margin-bottom:1.5rem;font-style:italic}
+.pkg-price{
+  font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--cyan);
+  margin-bottom:1.5rem;display:flex;align-items:baseline;gap:.3rem;
+}
+.pkg-price small{font-size:.8rem;color:var(--text2);font-weight:400}
+.pkg-divider{height:1px;background:var(--border2);margin-bottom:1.2rem}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.8rem}
+.pkg-features li{display:flex;align-items:flex-start;gap:.5rem;font-size:.8rem;color:var(--text2);line-height:1.4}
+.pkg-features li::before{content:'✦';color:var(--cyan);font-size:.6rem;margin-top:2px;flex-shrink:0}
+.pkg-features li.no{color:var(--muted)}
+.pkg-features li.no::before{color:var(--muted)}
+.pkg-cta{
+  width:100%;padding:.75rem;border-radius:8px;
+  font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.12em;
+  cursor:pointer;transition:all .3s;
+}
+.pkg-cta.outline{background:transparent;border:1px solid var(--border2);color:var(--text2)}
+.pkg-cta.outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.pkg-cta.fill{background:linear-gradient(135deg,var(--cyan),var(--purple));border:none;color:var(--bg)}
+.pkg-cta.fill:hover{box-shadow:0 0 25px rgba(0,245,212,.35);transform:translateY(-1px)}
 
-        .btn-outline:hover {
-            background: var(--cyan);
-            color: var(--bg-deep);
-            box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
-        }
+/* TESTIMONIALS */
+.testi-sec{padding:90px 0;background:linear-gradient(180deg,transparent,rgba(155,93,229,.02) 50%,transparent)}
+.testi-sec .sec-inner>div:first-child{text-align:center;margin-bottom:3rem}
+.testi-sec .sec-sub{margin:0 auto}
+.testi-sec .sec-rule{margin:1.2rem auto 0}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.tcard{
+  background:var(--card2);border:1px solid var(--border2);border-radius:14px;
+  padding:1.6rem;position:relative;transition:all .3s;
+}
+.tcard:hover{border-color:rgba(155,93,229,.3);transform:translateY(-3px)}
+.tcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--purple),transparent);border-radius:14px 0 0 14px}
+.tcard-stars{display:flex;gap:.2rem;margin-bottom:1rem}
+.tstar{color:var(--cyan);font-size:.85rem}
+.tcard-quote{font-size:.85rem;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:1.2rem}
+.tcard-author{display:flex;align-items:center;gap:.75rem}
+.tcard-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-size:.7rem;font-weight:700;color:var(--bg);flex-shrink:0;
+}
+.tcard-name{font-family:var(--fu);font-size:.82rem;font-weight:600;color:var(--text)}
+.tcard-role{font-size:.72rem;color:var(--muted)}
+.tcard-service{
+  margin-top:.75rem;
+  display:inline-block;
+  background:rgba(0,245,212,.08);border:1px solid rgba(0,245,212,.15);
+  color:var(--cyan);font-family:var(--fu);font-size:.65rem;letter-spacing:.06em;
+  padding:.18rem .55rem;border-radius:4px;
+}
 
-        /* Hero Section */
-        #hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 10%;
-            position: relative;
-            overflow: hidden;
-        }
+/* FAQ */
+.faq-sec{padding:90px 0}
+.faq-sec .sec-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.faq-list{display:flex;flex-direction:column;gap:.75rem}
+.faq-item{
+  background:var(--card2);border:1px solid var(--border2);border-radius:10px;
+  overflow:hidden;transition:border-color .3s;
+}
+.faq-item.open{border-color:rgba(0,245,212,.3)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.2rem;cursor:pointer;gap:1rem;
+}
+.faq-q span{font-family:var(--fu);font-size:.88rem;font-weight:500;color:var(--text);line-height:1.4}
+.faq-ico{
+  width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--text2);flex-shrink:0;transition:all .3s;
+}
+.faq-item.open .faq-ico{border-color:var(--cyan);color:var(--cyan);transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;
+  font-size:.82rem;color:var(--text2);line-height:1.7;padding:0 1.2rem;
+}
+.faq-item.open .faq-a{max-height:200px;padding:.2rem 1.2rem 1rem}
 
-        /* Film Grain & Light Leaks */
-        #hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: url('https://www.transparenttextures.com/patterns/film-grain.png');
-            opacity: 0.3;
-            pointer-events: none;
-        }
+/* CTA BANNER */
+.cta-sec{
+  padding:100px 1.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.cta-mesh{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(0,245,212,.07),transparent 60%),
+             radial-gradient(ellipse at 70% 50%,rgba(155,93,229,.07),transparent 60%);
+  animation:meshMove 8s ease infinite;
+}
+@keyframes meshMove{0%,100%{opacity:.6}50%{opacity:1}}
+.cta-sec .sec-inner{position:relative;z-index:1}
+.cta-sec h2{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:1rem;line-height:1.2}
+.cta-sec p{font-size:1rem;color:var(--text2);max-width:500px;margin:0 auto 2.5rem;line-height:1.7}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
-        .light-leak {
-            position: absolute;
-            width: 40vw;
-            height: 40vw;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: float 15s infinite alternate;
-        }
-        .leak-cyan { background: var(--cyan); top: -10%; left: -10%; }
-        .leak-purple { background: var(--purple); bottom: -10%; right: -10%; animation-delay: -5s; }
+/* CLIENT LOGOS */
+.logos-strip{
+  display:flex;align-items:center;justify-content:center;
+  gap:2rem;flex-wrap:wrap;margin-top:3rem;
+  padding-top:2rem;border-top:1px solid var(--border2);
+}
+.logo-item{
+  font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.12em;
+  color:var(--muted);transition:color .3s;cursor:default;
+}
+.logo-item:hover{color:var(--text2)}
+.logos-label{width:100%;text-align:center;font-family:var(--fu);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
 
-        @keyframes float {
-            0% { transform: translate(0,0) scale(1); }
-            100% { transform: translate(100px, 50px) scale(1.2); }
-        }
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  background:rgba(0,0,0,.3);
+  border-top:1px solid rgba(255,255,255,.04);
+  padding:3rem 1.5rem 2rem;
+}
+.footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem}
+.footer-logo{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.footer-logo span{color:var(--cyan)}
+.footer-desc{font-size:.8rem;color:var(--text2);line-height:1.65;margin-bottom:1.2rem}
+.footer-socials{display:flex;gap:.6rem}
+.fsoc{
+  width:34px;height:34px;border:1px solid var(--border2);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;color:var(--text2);text-decoration:none;transition:all .2s;
+}
+.fsoc:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 10px rgba(0,245,212,.2)}
+.footer-col h4{font-family:var(--fd);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col ul li a{font-size:.8rem;color:var(--text2);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--cyan)}
+.footer-bottom{
+  max-width:1140px;margin:2rem auto 0;padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+}
+.footer-bottom p{font-size:.75rem;color:var(--muted)}
+.footer-bottom a{color:var(--cyan);text-decoration:none}
 
-        .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
-        .gradient-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtext { font-size: 1.2rem; color: var(--text-dim); max-width: 650px; margin-bottom: 2.5rem; }
-        .hero-btns { display: flex; gap: 1.5rem; }
+/* UTILS */
+.reveal-on-scroll{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal-on-scroll.vis{opacity:1;transform:translateY(0)}
 
-        .quick-stats { margin-top: 5rem; display: flex; gap: 4rem; }
-        .stat-badge { display: flex; flex-direction: column; align-items: center; }
-        .stat-number { font-size: 1.8rem; color: var(--cyan); text-shadow: 0 0 10px rgba(0,245,212,0.3); }
-        .stat-label { font-size: 0.75rem; color: var(--text-dim); }
-
-        /* Sections Styling */
-        section { padding: 100px 8%; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-tag { font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 5px; color: var(--text-dim); }
-        .section-title { font-size: 3rem; font-style: italic; font-weight: 700; margin-top: 0.5rem; }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--cyan);
-            box-shadow: 0 10px 40px rgba(0, 245, 212, 0.1);
-        }
-
-        .service-card i {
-            font-size: 2.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .service-card h3 { margin-bottom: 1rem; font-size: 1.2rem; }
-        .service-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
-        .explore-link { color: var(--cyan); text-decoration: none; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
-        .explore-link::after { content: '→'; transition: transform 0.3s; }
-        .explore-link:hover::after { transform: translateX(5px); }
-
-        /* Process Flow */
-        .process-container {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-top: 4rem;
-        }
-
-        .process-container::before {
-            content: "";
-            position: absolute;
-            top: 30px;
-            left: 5%;
-            width: 90%;
-            height: 2px;
-            border-top: 2px dashed rgba(0, 245, 212, 0.2);
-            z-index: 0;
-        }
-
-        .process-step {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            z-index: 1;
-            padding: 0 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: 1s;
-        }
-
-        .process-step.visible { opacity: 1; transform: translateY(0); }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-deep);
-            border: 2px solid var(--cyan);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Orbitron';
-            color: var(--cyan);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 15px rgba(0,245,212,0.3);
-        }
-
-        /* Pricing */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .price-card {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 3.5rem 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .price-card.featured {
-            border: 2px solid var(--cyan);
-            transform: scale(1.05);
-            background: rgba(17, 24, 39, 0.9);
-            position: relative;
-        }
-
-        .popular-tag {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient);
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-
-        .price-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .price-tagline { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2rem; }
-        .price-value { font-size: 3rem; font-weight: 900; margin-bottom: 2rem; color: #fff; }
-        .price-list { list-style: none; text-align: left; margin-bottom: 2.5rem; }
-        .price-list li { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.9rem; }
-        .price-list li i { color: var(--cyan); margin-right: 12px; }
-
-        /* Bento Portfolio */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 250px;
-            gap: 1.5rem;
-        }
-
-        .bento-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            background: var(--card-bg);
-        }
-
-        .bento-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; filter: grayscale(30%); }
-        .bento-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
-
-        .bento-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(transparent, rgba(10, 13, 26, 0.9));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem;
-            opacity: 0;
-            transition: 0.4s;
-        }
-
-        .bento-item:hover .bento-overlay { opacity: 1; }
-        .wide { grid-column: span 2; }
-        .tall { grid-row: span 2; }
-
-        /* Marquee */
-        .marquee-section { background: rgba(255,255,255,0.02); padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .marquee-track { display: flex; overflow: hidden; width: 100%; }
-        .marquee-content { display: flex; gap: 4rem; animation: scroll 30s linear infinite; }
-        .eq-badge { display: flex; align-items: center; gap: 10px; color: var(--text-dim); font-family: 'Orbitron'; font-size: 0.9rem; white-space: nowrap; }
-        .eq-badge i { color: var(--cyan); font-size: 1.2rem; }
-
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* Inquiry Form */
-        .inquiry-split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; background: var(--card-bg); border-radius: 30px; padding: 4rem; overflow: hidden; position: relative; }
-        .form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-group label { color: var(--cyan); font-size: 0.8rem; font-weight: 700; font-family: 'Orbitron'; }
-        input, select, textarea {
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            background: #1a1f2e;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 1rem;
-            color: white;
-            border-radius: 8px;
-            outline: none;
-            font-family: 'Rajdhani';
-        }
-        input:focus, textarea:focus { border-color: var(--purple); }
-
-        /* CTA Banner */
-        .final-cta {
-            position: relative;
-            text-align: center;
-            padding: 8rem 0;
-            background: var(--bg-deep);
-            overflow: hidden;
-        }
-        .gradient-mesh {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 245, 212, 0.1) 0%, rgba(155, 93, 229, 0.1) 50%, transparent 100%);
-            z-index: 0;
-        }
-
-        @media (max-width: 1024px) {
-            .inquiry-split { grid-template-columns: 1fr; }
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-title { font-size: 2.5rem; }
-            .process-container { flex-direction: column; gap: 3rem; }
-            .process-container::before { display: none; }
-            .nav-links { display: none; }
-        }
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-                gap: 0.75rem;
-                align-items: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .nav-logo { font-size: 1.05rem; }
-            nav .btn-outline {
-                width: 100%;
-                text-align: center;
-            }
-
-            #hero {
-                min-height: 100vh;
-                height: auto;
-                padding: 7rem 1rem 4rem;
-            }
-
-            section,
-            #platforms { padding: 72px 1rem; }
-            .hero-title { font-size: 2.25rem; }
-            .hero-sub { font-size: 1rem; }
-            .hero-btns,
-            .hero-stats {
-                width: 100%;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero-btns .btn { width: 100%; text-align: center; }
-            .section-header { margin-bottom: 2.5rem; }
-            .services-grid,
-            .bento-grid,
-            .pricing-grid,
-            .dashboard-container,
-            .inquiry-split { grid-template-columns: 1fr; }
-
-            .framework-container {
-                height: 360px;
-                border-radius: 20px;
-            }
-
-            .center-node {
-                width: 90px;
-                height: 90px;
-                font-size: 0.85rem;
-            }
-
-            .orbit-ring {
-                width: 260px;
-                height: 260px;
-            }
-
-            .orbit-node {
-                width: 82px;
-                height: 34px;
-                font-size: 0.58rem;
-            }
-
-            .n2 { right: -40px; }
-            .n4 { left: -40px; }
-            .platform-row,
-            .metric-pills { justify-content: flex-start; }
-            .metric-pills { flex-wrap: wrap; }
-            .price-card,
-            .inquiry-split {
-                padding: 1.5rem 1rem;
-            }
-
-            .inquiry-split > * {
-                min-width: 0;
-            }
-
-            .inquiry-form {
-                width: 100%;
-                min-width: 0;
-            }
-
-            .inquiry-form > div { grid-template-columns: 1fr !important; }
-            .price-card.featured { transform: none; }
-            .final-cta { padding: 88px 1rem; }
-            .pulse-glow {
-                width: 260px;
-                height: 260px;
-            }
-        }
-    </style>
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .services-sec .sec-inner{grid-template-columns:1fr}
+  .faq-sec .sec-inner{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 1rem}.nl{display:none}
+  .services-grid{grid-template-columns:1fr}
+  .pkgs-grid{grid-template-columns:1fr}.pkg-card.featured{transform:scale(1)}
+  .testi-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .bc1,.bc2,.bc3,.bc4,.bc5,.bc6{grid-column:span 1;min-height:180px}
+  .process-track{flex-direction:column;align-items:center}
+  .process-track::before{display:none}
+  .hero-stats{gap:1.2rem}
+  .stat-sep{display:none}
+  .footer-inner{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-    <div class="particle-bg"></div>
+<canvas id="bgc"></canvas>
 
-    <nav>
-        <a href="#" class="nav-logo">XEROVA<span> MEDIA PRODUCTION</span></a>
-        <div class="nav-links">
-            <a href="#services">SERVICES</a>
-            <a href="#process">PROCESS</a>
-            <a href="#pricing">PACKAGES</a>
-            <a href="#work">PORTFOLIO</a>
-        </div>
-        <a href="#book" class="btn-outline">GET A QUOTE</a>
-    </nav>
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">
+    <span class="la">XEROVA</span>
+    <div class="ld"></div>
+    <span class="lsub">Digital</span>
+  </div>
+  <ul class="nl">
+    <li><a href="#">Home</a></li>
+    <li><a href="#" class="active">Services</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">3D Printing</a></li>
+    <li><a href="#">R&D</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <button class="ncta" onclick="document.getElementById('contact-cta').scrollIntoView({behavior:'smooth'})">GET A QUOTE</button>
+</nav>
 
-    <section id="hero">
-        <div class="light-leak leak-cyan"></div>
-        <div class="light-leak leak-purple"></div>
-        
-        <h1 class="hero-title">We Don't Just Capture Moments — <span class="gradient-text">We Create Them.</span></h1>
-        <p class="hero-subtext">Premium video production, photography, and high-impact content creation for brands that demand cinematic excellence.</p>
-        
-        <div class="hero-btns">
-            <a href="#work" class="btn-gradient">VIEW OUR WORK</a>
-            <a href="#book" class="btn-outline">GET A QUOTE</a>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-film"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="hb-dot"></div> Media Production Services</div>
+  <h1>We Don't Just Capture<br><span class="grad">We Create Moments.</span></h1>
+  <p>Premium video production, photography, and content creation for brands that demand excellence. From concept to final cut — every frame crafted with purpose.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">VIEW PACKAGES</button>
+    <button class="btn-outline" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">SEE OUR WORK</button>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num" data-count="500">0</div><div class="hstat-label">Projects Delivered</div></div>
+    <div class="stat-sep"></div>
+    <div class="hstat"><div class="hstat-num" data-count="48">0</div><div class="hstat-label">Hour Turnaround</div></div>
+    <div class="stat-sep"></div>
+    <div class="hstat"><div class="hstat-num" data-count="4">0</div><div class="hstat-label">K & 8K Production</div></div>
+    <div class="stat-sep"></div>
+    <div class="hstat"><div class="hstat-num" data-count="98">0</div><div class="hstat-label">% Client Satisfaction</div></div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
 
-        <div class="quick-stats">
-            <div class="stat-badge">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Projects</span>
-            </div>
-            <div class="stat-badge">
-                <span class="stat-number">4K & 8K</span>
-                <span class="stat-label">Production</span>
-            </div>
-            <div class="stat-badge">
-                <span class="stat-number">48hr</span>
-                <span class="stat-label">Turnaround</span>
-            </div>
+<!-- SERVICES -->
+<section class="services-sec" id="services">
+  <div class="sec-inner">
+    <div class="services-left reveal-on-scroll">
+      <div class="sec-label">What We Offer</div>
+      <h2 class="sec-title">Every Format.<br><span class="grad">Every Platform.</span></h2>
+      <p class="sec-sub">From cinematic brand films to snappy social reels — we produce content that stops the scroll, tells your story, and converts viewers into customers.</p>
+      <div class="sec-rule"></div>
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:.75rem">
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,245,212,.08);border:1px solid rgba(0,245,212,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0">✦</div>
+          <div>
+            <div style="font-family:var(--fu);font-size:.82rem;font-weight:600;color:var(--text)">Industry-Grade Equipment</div>
+            <div style="font-size:.75rem;color:var(--text2)">Sony FX6, RED Camera, DJI Ronin, 4K/8K capture</div>
+          </div>
         </div>
-    </section>
-
-    <section id="services">
-        <div class="section-header">
-            <p class="section-tag">OUR SERVICES</p>
-            <h2 class="section-title gradient-text">What We Offer</h2>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(155,93,229,.08);border:1px solid rgba(155,93,229,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0">✦</div>
+          <div>
+            <div style="font-family:var(--fu);font-size:.82rem;font-weight:600;color:var(--text)">Full Post-Production Suite</div>
+            <div style="font-size:.75rem;color:var(--text2)">DaVinci Resolve, Adobe Premiere, After Effects</div>
+          </div>
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-video"></i>
-                <h3>Video Production</h3>
-                <p>High-end brand films, commercials, and corporate videos tailored for impact.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-camera"></i>
-                <h3>Photography</h3>
-                <p>Professional product, lifestyle, and editorial photography for digital platforms.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-hashtag"></i>
-                <h3>Content Creation</h3>
-                <p>Social-first short-form content (Reels/TikTok) optimized for engagement.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-note"></i>
-                <h3>Content Writing</h3>
-                <p>Stunning 4K FPV and cinematic aerial shots captured by licensed pilots.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-cut"></i>
-                <h3>Post-Production</h3>
-                <p>Advanced color grading, sound design, and motion graphics editing.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-bullhorn"></i>
-                <h3>Brand Storytelling</h3>
-                <p>Developing narrative strategies that connect your brand with its audience.</p>
-                <a href="#" class="explore-link">Explore</a>
-            </div>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(247,37,133,.08);border:1px solid rgba(247,37,133,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0">✦</div>
+          <div>
+            <div style="font-family:var(--fu);font-size:.82rem;font-weight:600;color:var(--text)">Aerial & Ground Coverage</div>
+            <div style="font-size:.75rem;color:var(--text2)">DJI Mavic 3 Pro, licensed drone operators</div>
+          </div>
         </div>
-    </section>
-
-    <div class="marquee-section">
-        <div class="marquee-track">
-            <div class="marquee-content">
-                <div class="eq-badge"><i class="fas fa-bolt"></i> SONY FX6</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> DJI RONIN</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> RED CAMERA</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> NIKON Z9</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> MAVIC 3 PRO</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> DAVINCI RESOLVE</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> ADOBE SUITE</div>
-                <!-- Duplicate for infinite effect -->
-                <div class="eq-badge"><i class="fas fa-bolt"></i> SONY FX6</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> DJI RONIN</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> RED CAMERA</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> NIKON Z9</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> MAVIC 3 PRO</div>
-                <div class="eq-badge"><i class="fas fa-bolt"></i> DAVINCI RESOLVE</div>
-            </div>
-        </div>
+      </div>
     </div>
-
-    <section id="process">
-        <div class="section-header">
-            <p class="section-tag">THE WORKFLOW</p>
-            <h2 class="section-title gradient-text">How We Work</h2>
-        </div>
-        <div class="process-container">
-            <div class="process-step">
-                <div class="step-number">01</div>
-                <h3>Brief & Vision</h3>
-                <p>Initial discovery to align on goals and creative direction.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">02</div>
-                <h3>Pre-Production</h3>
-                <p>Scripting, storyboarding, and scouting the perfect locations.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">03</div>
-                <h3>Shoot Day</h3>
-                <p>Capturing the magic with high-end equipment and crew.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">04</div>
-                <h3>Delivery</h3>
-                <p>Precision editing and final files delivered in 48 hours.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing">
-        <div class="section-header">
-            <p class="section-tag">PACKAGES</p>
-            <h2 class="section-title gradient-text">Select a Tier</h2>
-        </div>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Starter</h3>
-                <p class="price-tagline">Perfect for small businesses</p>
-                <div class="price-value">₹999</div>
-                <ul class="price-list">
-                    <li><i class="fas fa-check"></i> 1 High-res Brand Video</li>
-                    <li><i class="fas fa-check"></i> 10 Profession Photos</li>
-                    <li><i class="fas fa-check"></i> 2 Revision Rounds</li>
-                    <li><i class="fas fa-check"></i> 5-Day Delivery</li>
-                </ul>
-                <button class="btn-outline" style="width: 100%;">BOOK NOW</button>
-            </div>
-            <div class="price-card featured">
-                <div class="popular-tag">MOST POPULAR</div>
-                <h3>Studio</h3>
-                <p class="price-tagline">The ultimate content package</p>
-                <div class="price-value">₹2,499</div>
-                <ul class="price-list">
-                    <li><i class="fas fa-check"></i> 3 Commercial Ads</li>
-                    <li><i class="fas fa-check"></i> 25 Lifestyle Photos</li>
-                    <li><i class="fas fa-check"></i> Aerial Drone Shots</li>
-                    <li><i class="fas fa-check"></i> 48hr Priority Delivery</li>
-                </ul>
-                <button class="btn-gradient" style="width: 100%;">BOOK NOW</button>
-            </div>
-            <div class="price-card">
-                <h3>Enterprise</h3>
-                <p class="price-tagline">Custom full-scale production</p>
-                <div class="price-value">Custom</div>
-                <ul class="price-list">
-                    <li><i class="fas fa-check"></i> Unlimited Deliverables</li>
-                    <li><i class="fas fa-check"></i> Full Production Crew</li>
-                    <li><i class="fas fa-check"></i> 8K Cinematic Resolution</li>
-                    <li><i class="fas fa-check"></i> Multi-Location Shoots</li>
-                </ul>
-                <button class="btn-outline" style="width: 100%;">CONTACT US</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="work">
-        <div class="section-header">
-            <p class="section-tag">OUR WORK</p>
-            <h2 class="section-title gradient-text">Recent Projects</h2>
-        </div>
-        <div class="bento-grid">
-            <div class="bento-item wide tall">
-                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800" alt="Work 1">
-                <div class="bento-overlay">
-                    <span class="section-tag" style="font-size: 0.6rem;">BRAND FILM</span>
-                    <h3>The Urban Explorer</h3>
-                    <p>Client: Northface</p>
-                </div>
-            </div>
-            <div class="bento-item">
-                <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=400" alt="Work 2">
-                <div class="bento-overlay">
-                    <h3>Summer Vibes</h3>
-                </div>
-            </div>
-            <div class="bento-item tall">
-                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=400" alt="Work 3">
-                <div class="bento-overlay">
-                    <h3>Cinematic Cuts</h3>
-                </div>
-            </div>
-            <div class="bento-item">
-                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=400" alt="Work 4">
-                <div class="bento-overlay">
-                    <h3>Lens Focus</h3>
-                </div>
-            </div>
-            <div class="bento-item wide">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800" alt="Work 5">
-                <div class="bento-overlay">
-                    <h3>Portrait Series</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="book">
-        <div class="inquiry-split">
-            <div class="inquiry-info">
-                <h2 class="hero-title" style="font-size: 2.2rem;">Let's Create Something Extraordinary</h2>
-                <p style="color: var(--text-dim); margin-bottom: 2rem;">Ready to elevate your brand's visual identity? Fill out the form and our creative director will reach out within 24 hours.</p>
-                
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <i class="fas fa-envelope" style="color: var(--cyan);"></i>
-                        <span>hello@xerovamedia.digital</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <i class="fas fa-phone" style="color: var(--cyan);"></i>
-                        <span>+91 (555) 902-3412</span>
-                    </div>
-                </div>
-            </div>
-
-            <form class="inquiry-form">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                    <div class="form-group">
-                        <label>FULL NAME</label>
-                        <input type="text" placeholder="John Doe">
-                    </div>
-                    <div class="form-group">
-                        <label>EMAIL ADDRESS</label>
-                        <input type="email" placeholder="john@brand.com">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>SERVICE TYPE</label>
-                    <select>
-                        <option>Video Production</option>
-                        <option>Photography</option>
-                        <option>Full Media Package</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>PROJECT BRIEF</label>
-                    <textarea rows="4" placeholder="Tell us about your vision..."></textarea>
-                </div>
-                <button type="submit" class="btn-gradient" style="width: 100%; padding: 1.2rem;">SEND ENQUIRY</button>
-            </form>
-        </div>
-    </section>
-
-    <div class="final-cta">
-        <div class="gradient-mesh"></div>
-        <div style="position: relative; z-index: 1;">
-            <h2 class="hero-title" style="font-size: 2.5rem;">Your Story Deserves to Be Seen.</h2>
-            <a href="mainform.html" class="btn-gradient" style="padding: 1.5rem 3.5rem; font-size: 1rem;">START YOUR PROJECT</a>
-        </div>
+    <div class="services-grid reveal-on-scroll" style="transition-delay:.15s">
+      <div class="srv-card">
+        <span class="srv-icon">🎬</span>
+        <div class="srv-name">Video Production</div>
+        <div class="srv-desc">Brand films, commercials, product videos, and corporate content shot in cinematic 4K/8K.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">📸</span>
+        <div class="srv-name">Photography</div>
+        <div class="srv-desc">Product shoots, lifestyle photography, corporate headshots, and editorial campaigns.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">✂️</span>
+        <div class="srv-name">Post-Production</div>
+        <div class="srv-desc">Professional editing, colour grading, motion graphics, VFX, and sound design.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">🚁</span>
+        <div class="srv-name">Aerial / Drone</div>
+        <div class="srv-desc">Licensed drone pilots capturing breathtaking aerial footage for any project scale.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">📱</span>
+        <div class="srv-name">Social Content</div>
+        <div class="srv-desc">Reels, TikToks, YouTube Shorts — short-form content engineered to go viral.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
+      <div class="srv-card">
+        <span class="srv-icon">🎙️</span>
+        <div class="srv-name">Brand Storytelling</div>
+        <div class="srv-desc">Documentary-style brand films that communicate your values and build emotional connection.</div>
+        <div class="srv-arrow">Explore <span>→</span></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        // Simple Intersection Observer for Process Steps
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2 });
+<!-- PROCESS -->
+<section class="process-sec" id="process">
+  <div class="sec-inner">
+    <div class="reveal-on-scroll">
+      <div class="sec-label" style="text-align:center">How We Work</div>
+      <h2 class="sec-title" style="text-align:center">From <span class="grad">Brief to Screen</span></h2>
+      <p class="sec-sub" style="text-align:center;margin:0 auto">A streamlined production process that keeps you in control at every stage — transparent, collaborative, and always on time.</p>
+    </div>
+    <div class="process-track reveal-on-scroll" style="transition-delay:.15s">
+      <div class="proc-step">
+        <div class="proc-node" data-n="01">🎯</div>
+        <div class="proc-title">Brief & Vision</div>
+        <div class="proc-desc">Discovery call to understand your goals, audience, and creative direction.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-node" data-n="02">📋</div>
+        <div class="proc-title">Pre-Production</div>
+        <div class="proc-desc">Scriptwriting, storyboarding, location scouting, and crew booking.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-node" data-n="03">🎥</div>
+        <div class="proc-title">Shoot Day</div>
+        <div class="proc-desc">Professional on-location or in-studio shoot with full equipment and crew.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-node" data-n="04">✂️</div>
+        <div class="proc-title">Post-Production</div>
+        <div class="proc-desc">Editing, colour grading, sound design, and motion graphics applied.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-node" data-n="05">🚀</div>
+        <div class="proc-title">Delivery & Review</div>
+        <div class="proc-desc">Final export in all required formats with revision rounds included.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        document.querySelectorAll('.process-step').forEach(step => {
-            observer.observe(step);
-        });
+<!-- PORTFOLIO / BENTO -->
+<section class="portfolio-sec" id="portfolio">
+  <div class="sec-inner">
+    <div>
+      <div>
+        <div class="sec-label reveal-on-scroll">Our Work</div>
+        <h2 class="sec-title reveal-on-scroll">Selected <span class="grad">Productions</span></h2>
+      </div>
+      <p class="sec-sub reveal-on-scroll" style="text-align:right;max-width:300px">Every pixel intentional. Every frame purposeful.</p>
+    </div>
+    <div class="bento reveal-on-scroll">
+      <div class="bcard bc1">
+        <div class="bcard-bg">🎬</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,212,.06),rgba(155,93,229,.06))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag">Brand Film</span><span class="btag purple">Fashion</span></div>
+          <div class="bcard-title">NOVA Apparel — Identity Film</div>
+          <div class="bcard-meta">4K · 3 min · Sony FX6</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>NOVA Apparel Brand Film</h4>
+          <p>A cinematic brand identity film capturing the essence of sustainable luxury fashion. Shot across 3 locations in 2 days.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+      <div class="bcard bc2">
+        <div class="bcard-bg">📸</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,37,133,.06),rgba(155,93,229,.06))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag pink">Product</span><span class="btag">E-Commerce</span></div>
+          <div class="bcard-title">LuxSkin — Product Campaign</div>
+          <div class="bcard-meta">240 photos · Studio shoot</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>LuxSkin Product Campaign</h4>
+          <p>Full product photography suite for skincare e-commerce brand. 240 final images delivered in 48 hours.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+      <div class="bcard bc3">
+        <div class="bcard-bg">🚁</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,212,.06),rgba(255,214,10,.04))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag">Aerial</span><span class="btag purple">Real Estate</span></div>
+          <div class="bcard-title">Prestige Estates — Aerial</div>
+          <div class="bcard-meta">4K Drone · DJI Mavic 3</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>Prestige Estates Aerial Tour</h4>
+          <p>Sweeping aerial showcase of premium residential properties. Increased listing engagement by 340%.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+      <div class="bcard bc4">
+        <div class="bcard-bg">📱</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(155,93,229,.07),rgba(247,37,133,.05))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag pink">Reels</span></div>
+          <div class="bcard-title">FoodFusion — Social Series</div>
+          <div class="bcard-meta">24 Reels · TikTok · 2M+ Views</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>FoodFusion Social Series</h4>
+          <p>Monthly social content series that generated 2M+ combined views and 300% follower growth.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+      <div class="bcard bc5">
+        <div class="bcard-bg">🎙️</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,230,118,.05),rgba(0,245,212,.05))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag">Documentary</span></div>
+          <div class="bcard-title">GreenPath — Brand Story</div>
+          <div class="bcard-meta">8 min · Awards Submitted</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>GreenPath Brand Documentary</h4>
+          <p>An 8-minute documentary exploring the founding story of a sustainable energy startup. Submitted for industry awards.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+      <div class="bcard bc6">
+        <div class="bcard-bg">✂️</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,214,10,.04),rgba(247,37,133,.05))"></div>
+        <div class="bcard-overlay"></div>
+        <div class="bcard-content">
+          <div class="bcard-tags"><span class="btag purple">Post-Production</span></div>
+          <div class="bcard-title">TechCore — Motion Graphics</div>
+          <div class="bcard-meta">After Effects · 3D · 2 min</div>
+        </div>
+        <div class="bcard-hover">
+          <h4>TechCore Motion Graphics</h4>
+          <p>Fully animated product explainer with 3D renders, data visualisation, and custom sound design.</p>
+          <button class="bcard-hover-btn">View Project →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Sticky Nav Blur on Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = "rgba(10, 13, 26, 0.95)";
-                nav.style.padding = "0.8rem 8%";
-            } else {
-                nav.style.background = "rgba(10, 13, 26, 0.85)";
-                nav.style.padding = "1.2rem 8%";
-            }
-        });
-    </script>
+<!-- EQUIPMENT MARQUEE -->
+<section class="equipment-sec">
+  <div class="eq-label reveal-on-scroll">Our Gear</div>
+  <h2 class="eq-title reveal-on-scroll">Industry-Grade <span class="grad">Equipment</span></h2>
+  <p class="eq-sub reveal-on-scroll">Every shoot backed by professional-grade tools — because quality starts before you press record.</p>
+
+  <div class="marquee-wrap" style="margin-bottom:.75rem">
+    <div class="marquee-track r1">
+      <div class="eq-pill"><span>🎥</span> Sony FX6</div>
+      <div class="eq-pill"><span>🔴</span> RED V-Raptor</div>
+      <div class="eq-pill"><span>🎬</span> DJI Ronin 4D</div>
+      <div class="eq-pill"><span>📷</span> Nikon Z9</div>
+      <div class="eq-pill"><span>🚁</span> DJI Mavic 3 Pro</div>
+      <div class="eq-pill"><span>💡</span> Godox Lighting</div>
+      <div class="eq-pill"><span>🎙️</span> Rode Wireless Pro</div>
+      <div class="eq-pill"><span>🔭</span> Sigma Art Lenses</div>
+      <div class="eq-pill"><span>🎥</span> Sony FX6</div>
+      <div class="eq-pill"><span>🔴</span> RED V-Raptor</div>
+      <div class="eq-pill"><span>🎬</span> DJI Ronin 4D</div>
+      <div class="eq-pill"><span>📷</span> Nikon Z9</div>
+      <div class="eq-pill"><span>🚁</span> DJI Mavic 3 Pro</div>
+      <div class="eq-pill"><span>💡</span> Godox Lighting</div>
+      <div class="eq-pill"><span>🎙️</span> Rode Wireless Pro</div>
+      <div class="eq-pill"><span>🔭</span> Sigma Art Lenses</div>
+    </div>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track r2">
+      <div class="eq-pill"><span>🎞️</span> DaVinci Resolve</div>
+      <div class="eq-pill"><span>🎨</span> Adobe Premiere Pro</div>
+      <div class="eq-pill"><span>✨</span> After Effects</div>
+      <div class="eq-pill"><span>🔊</span> Audition</div>
+      <div class="eq-pill"><span>🖼️</span> Lightroom Classic</div>
+      <div class="eq-pill"><span>🌐</span> Frame.io</div>
+      <div class="eq-pill"><span>📐</span> Cinema 4D</div>
+      <div class="eq-pill"><span>🎵</span> Logic Pro</div>
+      <div class="eq-pill"><span>🎞️</span> DaVinci Resolve</div>
+      <div class="eq-pill"><span>🎨</span> Adobe Premiere Pro</div>
+      <div class="eq-pill"><span>✨</span> After Effects</div>
+      <div class="eq-pill"><span>🔊</span> Audition</div>
+      <div class="eq-pill"><span>🖼️</span> Lightroom Classic</div>
+      <div class="eq-pill"><span>🌐</span> Frame.io</div>
+      <div class="eq-pill"><span>📐</span> Cinema 4D</div>
+      <div class="eq-pill"><span>🎵</span> Logic Pro</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-sec" id="packages">
+  <div class="sec-inner">
+    <div>
+      <div class="sec-label">Pricing</div>
+      <h2 class="sec-title">Production <span class="grad">Packages</span></h2>
+      <p class="sec-sub">Transparent pricing, no hidden costs. Every package includes dedicated production manager and unlimited revision rounds.</p>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="pkg-toggle" style="margin-top:2rem">
+      <span class="on" id="perProjLabel">Per Project</span>
+      <div class="toggle-sw" id="pkgToggle" onclick="togglePkg()"></div>
+      <span id="retainerLabel">Monthly Retainer</span>
+      <span class="save-badge" id="saveBadge" style="display:none">Save 20%</span>
+    </div>
+    <div class="pkgs-grid">
+      <div class="pkg-card reveal-on-scroll">
+        <div class="pkg-name">SPARK</div>
+        <div class="pkg-tagline">Perfect for startups & personal brands</div>
+        <div class="pkg-price"><span id="price1">₹25,000</span><small id="per1">/project</small></div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>1 video (up to 3 min) or 20 photos</li>
+          <li>1 shoot day (up to 6 hrs)</li>
+          <li>Basic colour grading</li>
+          <li>2 revision rounds</li>
+          <li>Delivery in 5 business days</li>
+          <li>MP4 + JPEG final files</li>
+          <li class="no">Motion graphics</li>
+          <li class="no">Drone footage</li>
+        </ul>
+        <button class="pkg-cta outline">GET STARTED</button>
+      </div>
+      <div class="pkg-card featured reveal-on-scroll" style="transition-delay:.1s">
+        <div class="pkg-badge">MOST POPULAR</div>
+        <div class="pkg-name">STUDIO</div>
+        <div class="pkg-tagline">For brands ready to scale their content</div>
+        <div class="pkg-price"><span id="price2">₹75,000</span><small id="per2">/project</small></div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>3 videos (up to 5 min each)</li>
+          <li>50 edited photos</li>
+          <li>2 shoot days (full day)</li>
+          <li>Advanced colour grading</li>
+          <li>Motion graphics included</li>
+          <li>4 revision rounds</li>
+          <li>Delivery in 3 business days</li>
+          <li>All formats + RAW files</li>
+        </ul>
+        <button class="pkg-cta fill">GET STARTED</button>
+      </div>
+      <div class="pkg-card reveal-on-scroll" style="transition-delay:.2s">
+        <div class="pkg-name">ENTERPRISE</div>
+        <div class="pkg-tagline">Full-scale production for major campaigns</div>
+        <div class="pkg-price"><span id="price3">Custom</span><small id="per3"></small></div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Unlimited videos & photos</li>
+          <li>Multi-day production schedule</li>
+          <li>Full crew (DP, gaffer, stylist)</li>
+          <li>Aerial drone coverage</li>
+          <li>3D animation & VFX</li>
+          <li>Unlimited revisions</li>
+          <li>Priority 48hr delivery</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <button class="pkg-cta outline">CONTACT US</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec" id="testimonials">
+  <div class="sec-inner">
+    <div>
+      <div class="sec-label">Client Stories</div>
+      <h2 class="sec-title">What Our <span class="grad">Clients Say</span></h2>
+      <p class="sec-sub">Real results, real relationships. Don't take our word for it — hear from the brands we've helped grow.</p>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="testi-grid" style="margin-top:3rem">
+      <div class="tcard reveal-on-scroll">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"Xerova transformed our brand's visual identity overnight. The brand film they produced generated more enquiries in one week than our entire previous quarter."</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">AK</div>
+          <div>
+            <div class="tcard-name">Ananya Kumar</div>
+            <div class="tcard-role">CEO, NOVA Apparel</div>
+          </div>
+        </div>
+        <div class="tcard-service">Brand Film · Video Production</div>
+      </div>
+      <div class="tcard reveal-on-scroll" style="transition-delay:.1s">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"The product photography was delivered in 48 hours and the quality was absolutely cinematic. Our conversion rate improved by 60% after updating our product pages."</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">RS</div>
+          <div>
+            <div class="tcard-name">Rohan Sharma</div>
+            <div class="tcard-role">Founder, LuxSkin</div>
+          </div>
+        </div>
+        <div class="tcard-service">Product Photography · E-Commerce</div>
+      </div>
+      <div class="tcard reveal-on-scroll" style="transition-delay:.2s">
+        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"Working with Xerova felt like having a full in-house production team. They understood our vision perfectly and the aerial footage was breathtaking."</div>
+        <div class="tcard-author">
+          <div class="tcard-avatar">PM</div>
+          <div>
+            <div class="tcard-name">Priya Mehta</div>
+            <div class="tcard-role">Marketing Head, Prestige Estates</div>
+          </div>
+        </div>
+        <div class="tcard-service">Aerial Drone · Real Estate</div>
+      </div>
+    </div>
+    <!-- LOGOS -->
+    <div class="logos-strip reveal-on-scroll">
+      <div class="logos-label">Trusted By Brands Worldwide</div>
+      <div class="logo-item">NOVA APPAREL</div>
+      <div class="logo-item">LUXSKIN</div>
+      <div class="logo-item">PRESTIGE ESTATES</div>
+      <div class="logo-item">FOODFUSION</div>
+      <div class="logo-item">GREENPATH</div>
+      <div class="logo-item">TECHCORE</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="sec-inner">
+    <div class="reveal-on-scroll">
+      <div class="sec-label">FAQs</div>
+      <h2 class="sec-title">Questions <span class="grad">Answered</span></h2>
+      <p class="sec-sub">Everything you need to know before booking your shoot. Can't find an answer? We're one message away.</p>
+      <div class="sec-rule"></div>
+      <div style="margin-top:2.5rem;background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-family:var(--fd);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:.75rem">Ready to Start?</div>
+        <p style="font-size:.82rem;color:var(--text2);line-height:1.65;margin-bottom:1.2rem">Book a free 30-minute discovery call with our production team. We'll review your brief and send a tailored proposal within 24 hours.</p>
+        <button class="btn-primary" style="width:100%;padding:.75rem" onclick="document.getElementById('contact-cta').scrollIntoView({behavior:'smooth'})">BOOK A DISCOVERY CALL</button>
+        <div style="display:flex;gap:1rem;margin-top:1rem">
+          <div style="flex:1;text-align:center;background:rgba(0,245,212,.04);border:1px solid rgba(0,245,212,.1);border-radius:8px;padding:.75rem">
+            <div style="font-family:var(--fd);font-size:.9rem;color:var(--cyan)">24h</div>
+            <div style="font-size:.7rem;color:var(--text2)">Proposal delivery</div>
+          </div>
+          <div style="flex:1;text-align:center;background:rgba(155,93,229,.04);border:1px solid rgba(155,93,229,.1);border-radius:8px;padding:.75rem">
+            <div style="font-family:var(--fd);font-size:.9rem;color:var(--purple)">NDA</div>
+            <div style="font-size:.7rem;color:var(--text2)">On request</div>
+          </div>
+          <div style="flex:1;text-align:center;background:rgba(0,230,118,.04);border:1px solid rgba(0,230,118,.1);border-radius:8px;padding:.75rem">
+            <div style="font-family:var(--fd);font-size:.9rem;color:var(--green)">FREE</div>
+            <div style="font-size:.7rem;color:var(--text2)">Discovery call</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-list reveal-on-scroll" style="transition-delay:.15s">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What formats do you deliver the final files in?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">We deliver video in MP4 (H.264 & H.265), MOV, and ProRes formats depending on your needs — optimised for web, broadcast, or social platforms. Photos are delivered as high-resolution JPEGs and TIFFs, with RAW files available on Studio and Enterprise packages.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How long does a typical project take from shoot to delivery?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">Turnaround depends on the package — Spark projects are delivered in 5 business days, Studio in 3 days, and Enterprise with priority 48-hour delivery. Rush delivery is available for an additional fee on all packages.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you travel for shoots outside your city?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">Absolutely. We've shot across India and internationally. Travel, accommodation, and logistics costs are billed separately and quoted upfront — no hidden fees. Our team is fully mobile and self-sufficient for multi-day travel shoots.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I approve the content before final delivery?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">Yes — all projects include revision rounds where you can review rough cuts and provide feedback before final delivery. We use Frame.io for seamless video review with timestamped comments. Your approval is required before any final file is exported.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you provide the crew and equipment, or do I need to arrange anything?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">We handle everything — camera operators, lighting technicians, drone pilots, sound recordists, and all equipment. You just need to provide the location access and any brand assets (products, talent briefings, etc.). We take care of the rest.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What's your payment structure?</span>
+          <div class="faq-ico">+</div>
+        </div>
+        <div class="faq-a">We require a 50% advance to confirm your booking and begin pre-production. The remaining 50% is due upon final delivery. For Enterprise packages, milestone-based payment schedules are available. We accept bank transfer, UPI, and international wire transfers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-sec" id="contact-cta">
+  <div class="cta-mesh"></div>
+  <div class="sec-inner reveal-on-scroll">
+    <div class="sec-label" style="text-align:center">Let's Create</div>
+    <h2>Your Story Deserves<br><span class="grad">To Be Seen.</span></h2>
+    <p>Whether you need a 30-second social reel or a full cinematic brand film — let's make something your audience will remember.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">START YOUR PROJECT</button>
+      <button class="btn-outline">VIEW FULL PORTFOLIO</button>
+    </div>
+    <div class="logos-strip" style="max-width:800px;margin:2rem auto 0">
+      <div class="logos-label">Every frame a story. Every project a partnership.</div>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center">
+        <span style="font-family:var(--fm);font-size:.7rem;color:var(--muted)">🎥 4K & 8K Production</span>
+        <span style="font-family:var(--fm);font-size:.7rem;color:var(--muted)">🚁 Licensed Drone Ops</span>
+        <span style="font-family:var(--fm);font-size:.7rem;color:var(--muted)">✂️ Full Post-Production</span>
+        <span style="font-family:var(--fm);font-size:.7rem;color:var(--muted)">📦 All Formats Delivered</span>
+        <span style="font-family:var(--fm);font-size:.7rem;color:var(--muted)">⚡ 48hr Rush Available</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span>XEROVA</span><div class="ld" style="width:5px;height:5px"></div> Digital</div>
+      <p class="footer-desc">We craft premium digital experiences through cutting-edge web solutions, creative design, 3D printing, media production, and research & development.</p>
+      <div class="footer-socials">
+        <a class="fsoc" href="#">𝕏</a>
+        <a class="fsoc" href="#">in</a>
+        <a class="fsoc" href="#">📷</a>
+        <a class="fsoc" href="#">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Web Solutions</a></li>
+        <li><a href="#">Media Production</a></li>
+        <li><a href="#">3D Printing</a></li>
+        <li><a href="#">IT Support</a></li>
+        <li><a href="#">Digital Marketing</a></li>
+        <li><a href="#">Creative Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Production</h4>
+      <ul>
+        <li><a href="#">Video Production</a></li>
+        <li><a href="#">Photography</a></li>
+        <li><a href="#">Aerial / Drone</a></li>
+        <li><a href="#">Post-Production</a></li>
+        <li><a href="#">Social Content</a></li>
+        <li><a href="#">Brand Films</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Xerova Digital. All rights reserved. Crafting the Future, One Pixel at a Time.</p>
+    <p>Made with ♥ by <a href="#">Xerova</a></p>
+  </div>
+</footer>
+
+<script>
+// CANVAS
+const cv = document.getElementById('bgc');
+const ct = cv.getContext('2d');
+let pts = [];
+function resz(){ cv.width=innerWidth; cv.height=innerHeight; }
+resz(); addEventListener('resize', resz);
+function initPts(){
+  pts=[];
+  const n=Math.floor(innerWidth*innerHeight/14000);
+  for(let i=0;i<n;i++) pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.6+.5});
+}
+initPts();
+function drawCanvas(){
+  ct.clearRect(0,0,cv.width,cv.height);
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>cv.width) p.vx*=-1;
+    if(p.y<0||p.y>cv.height) p.vy*=-1;
+    ct.beginPath(); ct.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ct.fillStyle='rgba(0,245,212,.4)'; ct.fill();
+  });
+  for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+    const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if(d<115){ ct.beginPath(); ct.moveTo(pts[i].x,pts[i].y); ct.lineTo(pts[j].x,pts[j].y); ct.strokeStyle=`rgba(0,245,212,${.12*(1-d/115)})`; ct.lineWidth=.5; ct.stroke(); }
+  }
+  requestAnimationFrame(drawCanvas);
+}
+drawCanvas();
+
+// NAV SCROLL
+addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('sc',scrollY>10); });
+
+// COUNTER ANIMATION
+function animCount(el, target, suffix=''){
+  let cur=0; const dur=2000; const step=target/dur*16;
+  const int=setInterval(()=>{
+    cur=Math.min(cur+step,target);
+    el.textContent=Math.floor(cur)+(suffix);
+    if(cur>=target) clearInterval(int);
+  },16);
+}
+const counters=document.querySelectorAll('[data-count]');
+let counted=false;
+const countObs=new IntersectionObserver(ents=>{
+  if(ents[0].isIntersecting&&!counted){
+    counted=true;
+    counters.forEach(el=>{
+      const t=parseInt(el.dataset.count);
+      animCount(el,t,el.closest('.hstat').querySelector('.hstat-label').textContent.includes('K')?'K':el.closest('.hstat').querySelector('.hstat-label').textContent.includes('%')?'%':'+');
+    });
+  }
+},{threshold:.5});
+if(counters[0]) countObs.observe(counters[0]);
+
+// SCROLL REVEAL
+const reveals=document.querySelectorAll('.reveal-on-scroll');
+const ro=new IntersectionObserver(ents=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); } });
+},{threshold:.12});
+reveals.forEach(r=>ro.observe(r));
+
+// PROCESS NODE ANIMATE
+const procSteps=document.querySelectorAll('.proc-step');
+const po=new IntersectionObserver(ents=>{
+  ents.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:.3});
+procSteps.forEach((s,i)=>{ setTimeout(()=>po.observe(s),i*100); });
+
+// FAQ TOGGLE
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+// PKG TOGGLE
+let isRetainer=false;
+const prices = {
+  project: ['₹25,000','₹75,000','Custom'],
+  retainer: ['₹18,000','₹55,000','Custom'],
+  per_p: ['/project','/project',''],
+  per_r: ['/month','/month',''],
+};
+function togglePkg(){
+  isRetainer=!isRetainer;
+  const sw=document.getElementById('pkgToggle');
+  sw.classList.toggle('on',isRetainer);
+  document.getElementById('perProjLabel').classList.toggle('on',!isRetainer);
+  document.getElementById('retainerLabel').classList.toggle('on',isRetainer);
+  document.getElementById('saveBadge').style.display=isRetainer?'inline':'none';
+  const pArr=isRetainer?prices.retainer:prices.project;
+  const perArr=isRetainer?prices.per_r:prices.per_p;
+  [1,2,3].forEach(i=>{
+    document.getElementById('price'+i).textContent=pArr[i-1];
+    document.getElementById('per'+i).textContent=perArr[i-1];
+  });
+}
+</script>
 </body>
 </html>
