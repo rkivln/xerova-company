@@ -39,8 +39,14 @@ create table if not exists public.web_form_submissions (
 
 alter table public.web_form_submissions enable row level security;
 
+grant usage on schema public to anon, authenticated;
+grant insert on table public.web_form_submissions to anon, authenticated;
+
+drop policy if exists "Allow public inserts for web form submissions"
+on public.web_form_submissions;
+
 create policy "Allow public inserts for web form submissions"
 on public.web_form_submissions
 for insert
-to anon
+to public
 with check (true);

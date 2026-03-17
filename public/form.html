@@ -1673,7 +1673,16 @@ async function submitForm() {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(errorText || 'Supabase request failed.');
+      let readableError = errorText || 'Supabase request failed.';
+
+      try {
+        const parsed = JSON.parse(errorText);
+        readableError = parsed.message || parsed.error_description || parsed.code || readableError;
+      } catch (parseError) {
+        // Keep the raw response text when it isn't JSON.
+      }
+
+      throw new Error(readableError);
     }
 
     setSubmitState('Project brief saved successfully.', 'success');
@@ -1684,7 +1693,7 @@ async function submitForm() {
     window.scrollTo({top:0,behavior:'smooth'});
   } catch (error) {
     console.error('Supabase form submission failed:', error);
-    setSubmitState('Could not save this brief to Supabase. Check the anon key, table name, and insert policy.', 'error');
+    setSubmitState(`Could not save this brief to Supabase: ${error.message}`, 'error');
   } finally {
     isSubmitting = false;
     submitBtn.disabled = false;
