@@ -3,226 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xerova Social Developement| Data-Driven Social Growth</title>
+    <title>Xerova Media Production | Premium Production & Content Creation</title>
      <link rel="icon" type="image/png" href="./favicon.png">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Fonts --> 
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0d1a;
-            --card: #111827;
+            --bg-deep: #0a0d1a;
+            --card-bg: #111827;
             --cyan: #00f5d4;
             --purple: #9b5de5;
-            --pink: #f72585;
-            --text: #e2e8f0;
-            --dim: #64748b;
-            --grad: linear-gradient(135deg, var(--cyan), var(--purple));
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--cyan), var(--purple));
             --glass: rgba(17, 24, 39, 0.7);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        h1, h2, h3, .nav-logo, .section-tag, .pricing-name {
+        h1, h2, h3, .nav-logo, .stat-number, .btn-text {
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
-
-        /* --- Background Particles (Social Graph) --- */
-        #graph-canvas {
+        /* Background Decorations */
+        .particle-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--cyan) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.08;
             z-index: -1;
-            opacity: 0.4;
             pointer-events: none;
         }
 
-        /* --- Navigation --- */
+        /* Navbar */
         nav {
             position: fixed;
-            top: 0; width: 100%; padding: 1.2rem 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 13, 26, 0.8);
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 13, 26, 0.85);
             backdrop-filter: blur(15px);
             z-index: 1000;
             border-bottom: 1px solid rgba(0, 245, 212, 0.1);
         }
+
         .nav-logo { font-size: 1.4rem; font-weight: 900; color: #fff; text-decoration: none; }
         .nav-logo span { color: var(--cyan); }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.85rem; transition: var(--transition); }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.85rem; transition: var(--transition); }
         .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
 
-        /* --- Hero Section --- */
-        #hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 0 10%;
-        }
-        .hero-title { font-size: 3.8rem; line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
-        .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-sub { font-size: 1.2rem; color: var(--dim); max-width: 650px; margin-bottom: 2.5rem; }
-        .hero-btns { display: flex; gap: 1.5rem; }
-
-        .btn {
-            padding: 1rem 2rem; border-radius: 4px; font-weight: 700; font-family: 'Orbitron';
-            font-size: 0.8rem; cursor: pointer; transition: var(--transition); text-decoration: none;
+        /* Buttons */
+        .btn-gradient {
+            padding: 0.8rem 1.8rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
             display: inline-block;
         }
-        .btn-grad { background: var(--grad); color: #fff; border: none; box-shadow: 0 0 20px rgba(0, 245, 212, 0.3); }
-        .btn-grad:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(155, 93, 229, 0.5); }
-        .btn-outline { border: 1px solid var(--cyan); color: var(--cyan); background: transparent; }
-        .btn-outline:hover { background: var(--cyan); color: var(--bg); }
 
-        .hero-stats { margin-top: 5rem; display: flex; gap: 4rem; }
-        .stat-item { text-align: center; }
-        .stat-num { font-size: 2.2rem; color: var(--cyan); font-weight: 900; display: block; font-family: 'Orbitron'; }
-        .stat-label { font-size: 0.75rem; color: var(--dim); text-transform: uppercase; }
-
-        /* --- Platforms --- */
-        #platforms { padding: 80px 8%; text-align: center; }
-        .platform-row { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; }
-        .plat-badge {
-            background: var(--card); padding: 0.8rem 1.5rem; border-radius: 50px;
-            display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition); cursor: default;
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(155, 93, 229, 0.5);
         }
-        .plat-badge i { font-size: 1.2rem; }
-        .plat-badge:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 5px 20px rgba(0, 245, 212, 0.2); }
-        
-        /* Platform specific hover colors */
-        .plat-ig:hover { box-shadow: 0 0 20px #f72585; color: #f72585; }
-        .plat-tt:hover { box-shadow: 0 0 20px #00f5d4; color: #00f5d4; }
-        .plat-li:hover { box-shadow: 0 0 20px #0077b5; color: #0077b5; }
 
-        /* --- Services Grid --- */
+        .btn-outline {
+            padding: 0.8rem 1.8rem;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--cyan);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Film Grain & Light Leaks */
+        #hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('https://www.transparenttextures.com/patterns/film-grain.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .light-leak {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 15s infinite alternate;
+        }
+        .leak-cyan { background: var(--cyan); top: -10%; left: -10%; }
+        .leak-purple { background: var(--purple); bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0,0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; }
+        .gradient-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtext { font-size: 1.2rem; color: var(--text-dim); max-width: 650px; margin-bottom: 2.5rem; }
+        .hero-btns { display: flex; gap: 1.5rem; }
+
+        .quick-stats { margin-top: 5rem; display: flex; gap: 4rem; }
+        .stat-badge { display: flex; flex-direction: column; align-items: center; }
+        .stat-number { font-size: 1.8rem; color: var(--cyan); text-shadow: 0 0 10px rgba(0,245,212,0.3); }
+        .stat-label { font-size: 0.75rem; color: var(--text-dim); }
+
+        /* Sections Styling */
         section { padding: 100px 8%; }
         .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-tag { font-size: 0.8rem; color: var(--dim); letter-spacing: 5px; }
-        .section-title { font-size: 2.8rem; margin-top: 0.5rem; }
+        .section-tag { font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 5px; color: var(--text-dim); }
+        .section-title { font-size: 3rem; font-style: italic; font-weight: 700; margin-top: 0.5rem; }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
         .service-card {
-            background: var(--card); padding: 3rem 2rem; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--cyan); box-shadow: 0 10px 40px rgba(0, 245, 212, 0.1); }
-        .service-card i { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .service-card h3 { margin-bottom: 1rem; }
-        .service-card p { color: var(--dim); font-size: 0.95rem; }
 
-        /* --- Orbital Framework --- */
-        .framework-container {
-            height: 600px; position: relative; display: flex; justify-content: center; align-items: center;
-            background: #111827; border-radius: 30px; margin-top: 4rem; overflow: hidden;
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 40px rgba(0, 245, 212, 0.1);
         }
-        .center-node {
-            width: 120px; height: 120px; background: var(--bg); border: 2px solid var(--cyan);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            z-index: 10; box-shadow: 0 0 30px var(--cyan); font-weight: 900;
-        }
-        .orbit-ring {
-            position: absolute; width: 450px; height: 450px; border: 1px dashed rgba(0, 245, 212, 0.2);
-            border-radius: 50%; animation: rotate 40s linear infinite;
-        }
-        .orbit-node {
-            position: absolute; width: 100px; height: 40px; background: var(--card);
-            border: 1px solid var(--purple); border-radius: 20px; display: flex;
-            justify-content: center; align-items: center; font-size: 0.7rem; font-weight: 700;
-            box-shadow: 0 0 15px rgba(155, 93, 229, 0.3);
-        }
-        /* Position nodes around the circle */
-        .n1 { top: -20px; left: 50%; transform: translateX(-50%); }
-        .n2 { top: 50%; right: -50px; transform: translateY(-50%); }
-        .n3 { bottom: -20px; left: 50%; transform: translateX(-50%); }
-        .n4 { top: 50%; left: -50px; transform: translateY(-50%); }
 
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        /* --- Bento Case Studies --- */
-        .bento-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 1.5rem;
+        .service-card i {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: block;
         }
-        .bento-item {
-            background: var(--card); border-radius: 20px; padding: 2.5rem;
-            position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
+
+        .service-card h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+        .service-card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .explore-link { color: var(--cyan); text-decoration: none; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
+        .explore-link::after { content: '→'; transition: transform 0.3s; }
+        .explore-link:hover::after { transform: translateX(5px); }
+
+        /* Process Flow */
+        .process-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-container::before {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            border-top: 2px dashed rgba(0, 245, 212, 0.2);
+            z-index: 0;
+        }
+
+        .process-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            padding: 0 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 1s;
+        }
+
+        .process-step.visible { opacity: 1; transform: translateY(0); }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-deep);
+            border: 2px solid var(--cyan);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Orbitron';
+            color: var(--cyan);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(0,245,212,0.3);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .price-card {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3.5rem 2.5rem;
+            border-radius: 20px;
+            text-align: center;
             transition: var(--transition);
         }
-        .bento-item:hover { border-color: var(--cyan); transform: scale(1.02); }
-        .bento-1 { grid-column: span 2; grid-row: span 2; background: linear-gradient(rgba(10,13,26,0.8), rgba(10,13,26,0.8)), url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800'); background-size: cover; }
-        .bento-2 { grid-column: span 2; }
-        .bento-tag { font-size: 0.7rem; color: var(--cyan); font-weight: 700; }
-        .bento-result { font-size: 2rem; font-weight: 900; margin: 1rem 0; color: #fff; }
-        .metric-pills { display: flex; gap: 10px; margin-top: 1rem; }
-        .pill { background: rgba(0, 245, 212, 0.1); color: var(--cyan); padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.7rem; border: 1px solid rgba(0, 245, 212, 0.2); }
 
-        /* --- Pricing --- */
-        .pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
-        .toggle-btn { width: 50px; height: 26px; background: var(--card); border-radius: 20px; position: relative; cursor: pointer; border: 1px solid var(--cyan); }
-        .toggle-dot { width: 18px; height: 18px; background: var(--cyan); border-radius: 50%; position: absolute; top: 3px; left: 4px; transition: 0.3s; }
-        .toggle-btn.active .toggle-dot { left: 26px; background: var(--purple); }
-
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; align-items: center; }
-        .price-card {
-            background: var(--glass); padding: 3.5rem 2.5rem; border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1); text-align: center; transition: var(--transition);
+        .price-card.featured {
+            border: 2px solid var(--cyan);
+            transform: scale(1.05);
+            background: rgba(17, 24, 39, 0.9);
+            position: relative;
         }
-        .price-card.featured { transform: scale(1.05); border: 2px solid var(--cyan); background: rgba(17,24,39,0.9); position: relative; }
-        .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--grad); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.7rem; font-weight: 800; }
-        .price-val { font-size: 3.5rem; font-weight: 900; color: #fff; margin: 1.5rem 0; }
-        .price-list { list-style: none; text-align: left; margin-bottom: 2.5rem; color: var(--dim); }
-        .price-list li { margin-bottom: 0.8rem; font-size: 0.9rem; }
-        .price-list i { color: var(--cyan); margin-right: 10px; }
 
-        /* --- Analytics Dashboard Mockup --- */
-        .dashboard-container {
-            background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 2rem;
-            display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 4rem;
+        .popular-tag {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
         }
-        .dash-widget { background: #161b22; border-radius: 8px; padding: 1.5rem; border: 1px solid #30363d; }
-        .chart-mock { height: 150px; width: 100%; border-bottom: 2px solid var(--cyan); margin-top: 1rem; position: relative; overflow: hidden; }
-        .chart-line { width: 100%; height: 100%; stroke: var(--cyan); stroke-width: 2; fill: none; }
-        
-        /* --- Contact Form --- */
-        .contact-wrap { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; background: var(--card); padding: 4rem; border-radius: 30px; }
-        .ticker-wrap { background: #0a0d1a; padding: 1rem; border-radius: 10px; margin-top: 2rem; overflow: hidden; white-space: nowrap; }
-        .ticker { display: inline-block; animation: ticker 20s linear infinite; color: var(--cyan); font-family: 'JetBrains Mono'; font-size: 0.8rem; }
-        @keyframes ticker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; color: var(--cyan); font-size: 0.7rem; margin-bottom: 0.5rem; font-family: 'Orbitron'; }
+        .price-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .price-tagline { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2rem; }
+        .price-value { font-size: 3rem; font-weight: 900; margin-bottom: 2rem; color: #fff; }
+        .price-list { list-style: none; text-align: left; margin-bottom: 2.5rem; }
+        .price-list li { margin-bottom: 1rem; color: var(--text-dim); font-size: 0.9rem; }
+        .price-list li i { color: var(--cyan); margin-right: 12px; }
+
+        /* Bento Portfolio */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 250px;
+            gap: 1.5rem;
+        }
+
+        .bento-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+
+        .bento-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; filter: grayscale(30%); }
+        .bento-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+
+        .bento-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(10, 13, 26, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .bento-item:hover .bento-overlay { opacity: 1; }
+        .wide { grid-column: span 2; }
+        .tall { grid-row: span 2; }
+
+        /* Marquee */
+        .marquee-section { background: rgba(255,255,255,0.02); padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .marquee-track { display: flex; overflow: hidden; width: 100%; }
+        .marquee-content { display: flex; gap: 4rem; animation: scroll 30s linear infinite; }
+        .eq-badge { display: flex; align-items: center; gap: 10px; color: var(--text-dim); font-family: 'Orbitron'; font-size: 0.9rem; white-space: nowrap; }
+        .eq-badge i { color: var(--cyan); font-size: 1.2rem; }
+
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Inquiry Form */
+        .inquiry-split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; background: var(--card-bg); border-radius: 30px; padding: 4rem; overflow: hidden; position: relative; }
+        .form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { color: var(--cyan); font-size: 0.8rem; font-weight: 700; font-family: 'Orbitron'; }
         input, select, textarea {
-            width: 100%; background: #0a0d1a; border: 1px solid rgba(255,255,255,0.1);
-            padding: 1rem; color: #fff; border-radius: 4px; outline: none; transition: 0.3s;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            background: #1a1f2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'Rajdhani';
         }
-        input:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0, 245, 212, 0.2); }
+        input:focus, textarea:focus { border-color: var(--purple); }
 
-        /* --- Footer --- */
-        .final-cta { text-align: center; padding: 120px 8%; position: relative; }
-        .pulse-glow {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 245, 212, 0.15) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
+        /* CTA Banner */
+        .final-cta {
+            position: relative;
+            text-align: center;
+            padding: 8rem 0;
+            background: var(--bg-deep);
+            overflow: hidden;
         }
-        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; } }
+        .gradient-mesh {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 245, 212, 0.1) 0%, rgba(155, 93, 229, 0.1) 50%, transparent 100%);
+            z-index: 0;
+        }
 
         @media (max-width: 1024px) {
-            .contact-wrap, .dashboard-container, .bento-grid { grid-template-columns: 1fr; }
+            .inquiry-split { grid-template-columns: 1fr; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-title { font-size: 2.5rem; }
+            .process-container { flex-direction: column; gap: 3rem; }
+            .process-container::before { display: none; }
             .nav-links { display: none; }
-            .bento-1, .bento-2 { grid-column: span 1; grid-row: span 1; }
         }
         @media (max-width: 768px) {
             nav {
@@ -244,353 +408,378 @@
                 padding: 7rem 1rem 4rem;
             }
 
-            section { padding: 72px 1rem; }
-            .hero-title { font-size: 2.2rem; }
-            .hero-subtext { font-size: 1rem; }
+            section,
+            #platforms { padding: 72px 1rem; }
+            .hero-title { font-size: 2.25rem; }
+            .hero-sub { font-size: 1rem; }
             .hero-btns,
-            .quick-stats {
+            .hero-stats {
                 width: 100%;
                 flex-direction: column;
                 gap: 1rem;
             }
 
-            .hero-btns a { width: 100%; }
+            .hero-btns .btn { width: 100%; text-align: center; }
             .section-header { margin-bottom: 2.5rem; }
             .services-grid,
+            .bento-grid,
             .pricing-grid,
-            .bento-grid { grid-template-columns: 1fr; }
-            .price-card.featured { transform: none; }
-            .wide,
-            .tall {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
+            .dashboard-container,
+            .inquiry-split { grid-template-columns: 1fr; }
 
-            .contact-wrap {
-                gap: 2rem;
-                padding: 1.5rem 1rem;
+            .framework-container {
+                height: 360px;
                 border-radius: 20px;
             }
 
-            .contact-form { width: 100%; }
-            .final-cta { padding: 5rem 1rem; }
+            .center-node {
+                width: 90px;
+                height: 90px;
+                font-size: 0.85rem;
+            }
+
+            .orbit-ring {
+                width: 260px;
+                height: 260px;
+            }
+
+            .orbit-node {
+                width: 82px;
+                height: 34px;
+                font-size: 0.58rem;
+            }
+
+            .n2 { right: -40px; }
+            .n4 { left: -40px; }
+            .platform-row,
+            .metric-pills { justify-content: flex-start; }
+            .metric-pills { flex-wrap: wrap; }
+            .price-card,
+            .inquiry-split {
+                padding: 1.5rem 1rem;
+            }
+
+            .inquiry-split > * {
+                min-width: 0;
+            }
+
+            .inquiry-form {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .inquiry-form > div { grid-template-columns: 1fr !important; }
+            .price-card.featured { transform: none; }
+            .final-cta { padding: 88px 1rem; }
+            .pulse-glow {
+                width: 260px;
+                height: 260px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="graph-canvas"></canvas>
+    <div class="particle-bg"></div>
 
     <nav>
-        <a href="#" class="nav-logo">XEROVA<span> DIGITAL SOLUTIONS</span></a>
+        <a href="#" class="nav-logo">XEROVA<span> MEDIA PRODUCTION</span></a>
         <div class="nav-links">
             <a href="#services">SERVICES</a>
-            <a href="#framework">METHOD</a>
-            <a href="#results">RESULTS</a>
-            <a href="#pricing">PRICING</a>
+            <a href="#process">PROCESS</a>
+            <a href="#pricing">PACKAGES</a>
+            <a href="#work">PORTFOLIO</a>
         </div>
-        <a href="#contact" class="btn btn-outline">GET A QUOTE</a>
+        <a href="#book" class="btn-outline">GET A QUOTE</a>
     </nav>
 
     <section id="hero">
-        <h1 class="hero-title">Turn Followers Into <span class="grad-text">Loyal Customers.</span></h1>
-        <p class="hero-sub">Data-driven social media management and growth strategies that transform your brand's online presence into a revenue machine.</p>
+        <div class="light-leak leak-cyan"></div>
+        <div class="light-leak leak-purple"></div>
+        
+        <h1 class="hero-title">We Don't Just Capture Moments — <span class="gradient-text">We Create Them.</span></h1>
+        <p class="hero-subtext">Premium video production, photography, and high-impact content creation for brands that demand cinematic excellence.</p>
         
         <div class="hero-btns">
-            <a href="#contact" class="btn btn-grad">START GROWING</a>
-            <a href="#results" class="btn btn-outline">VIEW CASE STUDIES</a>
+            <a href="#work" class="btn-gradient">VIEW OUR WORK</a>
+            <a href="#book" class="btn-outline">GET A QUOTE</a>
         </div>
 
-        <div class="hero-stats">
-            <div class="stat-item">
-                <span class="stat-num">10M+</span>
-                <span class="stat-label">Reach Generated</span>
+        <div class="quick-stats">
+            <div class="stat-badge">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Projects</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-num">30+</span>
-                <span class="stat-label">Brands Managed</span>
+            <div class="stat-badge">
+                <span class="stat-number">4K & 8K</span>
+                <span class="stat-label">Production</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-num">5X</span>
-                <span class="stat-label">Avg. Engagement</span>
+            <div class="stat-badge">
+                <span class="stat-number">48hr</span>
+                <span class="stat-label">Turnaround</span>
             </div>
         </div>
     </section>
-
-    <div id="platforms">
-        <p class="section-tag">WHERE WE WORK</p>
-        <div class="platform-row">
-            <div class="plat-badge plat-ig"><i class="fab fa-instagram"></i> Instagram</div>
-            <div class="plat-badge plat-tt"><i class="fab fa-tiktok"></i> TikTok</div>
-            <div class="plat-badge plat-li"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
-            <div class="plat-badge"><i class="fab fa-youtube"></i> YouTube</div>
-            <div class="plat-badge"><i class="fab fa-twitter"></i> X (Twitter)</div>
-            <div class="plat-badge"><i class="fab fa-facebook-f"></i> Facebook</div>
-        </div>
-    </div>
 
     <section id="services">
         <div class="section-header">
-            <p class="section-tag">WHAT WE OFFER</p>
-            <h2 class="section-title">Our Services</h2>
+            <p class="section-tag">OUR SERVICES</p>
+            <h2 class="section-title gradient-text">What We Offer</h2>
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>Content Strategy</h3>
-                <p>Custom-tailored roadmaps designed to align your brand with trending narratives.</p>
+                <i class="fas fa-video"></i>
+                <h3>Video Production</h3>
+                <p>High-end brand films, commercials, and corporate videos tailored for impact.</p>
+                <a href="#" class="explore-link">Explore</a>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-camera"></i>
+                <h3>Photography</h3>
+                <p>Professional product, lifestyle, and editorial photography for digital platforms.</p>
+                <a href="#" class="explore-link">Explore</a>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-hashtag"></i>
+                <h3>Content Creation</h3>
+                <p>Social-first short-form content (Reels/TikTok) optimized for engagement.</p>
+                <a href="#" class="explore-link">Explore</a>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-note"></i>
+                <h3>Content Writing</h3>
+                <p>Stunning 4K FPV and cinematic aerial shots captured by licensed pilots.</p>
+                <a href="#" class="explore-link">Explore</a>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-cut"></i>
+                <h3>Post-Production</h3>
+                <p>Advanced color grading, sound design, and motion graphics editing.</p>
+                <a href="#" class="explore-link">Explore</a>
             </div>
             <div class="service-card">
                 <i class="fas fa-bullhorn"></i>
-                <h3>Paid Social Ads</h3>
-                <p>High-conversion ad campaigns across Meta, TikTok, and LinkedIn targeting your niche.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-users"></i>
-                <h3>Community Management</h3>
-                <p>Proactive engagement and moderation to turn your comments into conversations.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-chart-line"></i>
-                <h3>Analytics & Reporting</h3>
-                <p>Deep-dive data reports every month to track ROI, reach, and conversion trends.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-pen-nib"></i>
-                <h3>Content Creation</h3>
-                <p>Professional video editing, graphic design, and copywriting for every platform.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-handshake"></i>
-                <h3>Influencer Outreach</h3>
-                <p>Connecting your brand with creators who actually have influence in your sector.</p>
+                <h3>Brand Storytelling</h3>
+                <p>Developing narrative strategies that connect your brand with its audience.</p>
+                <a href="#" class="explore-link">Explore</a>
             </div>
         </div>
     </section>
 
-    <section id="framework">
-        <div class="section-header">
-            <p class="section-tag">THE PROCESS</p>
-            <h2 class="section-title grad-text">Growth Framework</h2>
-        </div>
-        <div class="framework-container">
-            <div class="center-node">BRAND</div>
-            <div class="orbit-ring">
-                <div class="orbit-node n1">AUDIT</div>
-                <div class="orbit-node n2">STRATEGY</div>
-                <div class="orbit-node n3">CONTENT</div>
-                <div class="orbit-node n4">REPORT</div>
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <div class="eq-badge"><i class="fas fa-bolt"></i> SONY FX6</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> DJI RONIN</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> RED CAMERA</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> NIKON Z9</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> MAVIC 3 PRO</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> DAVINCI RESOLVE</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> ADOBE SUITE</div>
+                <!-- Duplicate for infinite effect -->
+                <div class="eq-badge"><i class="fas fa-bolt"></i> SONY FX6</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> DJI RONIN</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> RED CAMERA</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> NIKON Z9</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> MAVIC 3 PRO</div>
+                <div class="eq-badge"><i class="fas fa-bolt"></i> DAVINCI RESOLVE</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="results">
+    <section id="process">
         <div class="section-header">
-            <p class="section-tag">REAL DATA</p>
-            <h2 class="section-title">Case <span class="grad-text">Results</span></h2>
+            <p class="section-tag">THE WORKFLOW</p>
+            <h2 class="section-title gradient-text">How We Work</h2>
         </div>
-        <div class="bento-grid">
-            <div class="bento-item bento-1">
-                <span class="bento-tag">E-COMMERCE</span>
-                <h3 class="bento-result">+340% Engagement</h3>
-                <p>Transforming a legacy retail brand into a TikTok powerhouse in 90 days.</p>
-                <div class="metric-pills">
-                    <span class="pill">20k+ New Followers</span>
-                    <span class="pill">1.2M Reach</span>
-                </div>
+        <div class="process-container">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3>Brief & Vision</h3>
+                <p>Initial discovery to align on goals and creative direction.</p>
             </div>
-            <div class="bento-item bento-2">
-                <span class="bento-tag">SaaS / TECH</span>
-                <h3 class="bento-result" style="font-size: 1.5rem;">5.2x Conversion Boost</h3>
-                <p>LinkedIn funnel optimization for B2B lead generation.</p>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3>Pre-Production</h3>
+                <p>Scripting, storyboarding, and scouting the perfect locations.</p>
             </div>
-            <div class="bento-item">
-                <span class="bento-tag">FASHION</span>
-                <h3 class="bento-result" style="font-size: 1.2rem;">Viral Strategy</h3>
-                <p>Over 5M organic views on Reels.</p>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3>Shoot Day</h3>
+                <p>Capturing the magic with high-end equipment and crew.</p>
             </div>
-            <div class="bento-item">
-                <span class="bento-tag">LIFESTYLE</span>
-                <h3 class="bento-result" style="font-size: 1.2rem;">$12k Ad Spend</h3>
-                <p>$85k Revenue Generated.</p>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h3>Delivery</h3>
+                <p>Precision editing and final files delivered in 48 hours.</p>
             </div>
         </div>
     </section>
 
     <section id="pricing">
         <div class="section-header">
-            <p class="section-tag">PLANS</p>
-            <h2 class="section-title">Investment</h2>
-        </div>
-        <div class="pricing-toggle">
-            <span>Monthly</span>
-            <div class="toggle-btn" id="price-toggle"><div class="toggle-dot"></div></div>
-            <span>Annual <span style="color:var(--cyan); font-size:0.8rem;">(Save 15%)</span></span>
+            <p class="section-tag">PACKAGES</p>
+            <h2 class="section-title gradient-text">Select a Tier</h2>
         </div>
         <div class="pricing-grid">
             <div class="price-card">
-                <h3 class="pricing-name">Starter</h3>
-                <p class="mono" style="font-size:0.8rem;">For emerging brands</p>
-                <div class="price-val" id="price-starter">₹999</div>
+                <h3>Starter</h3>
+                <p class="price-tagline">Perfect for small businesses</p>
+                <div class="price-value">₹999</div>
                 <ul class="price-list">
-                    <li><i class="fas fa-check"></i> 2 Platforms</li>
-                    <li><i class="fas fa-check"></i> 12 Posts / Month</li>
-                    <li><i class="fas fa-check"></i> Community Moderation</li>
-                    <li><i class="fas fa-check"></i> Monthly Analytics</li>
+                    <li><i class="fas fa-check"></i> 1 High-res Brand Video</li>
+                    <li><i class="fas fa-check"></i> 10 Profession Photos</li>
+                    <li><i class="fas fa-check"></i> 2 Revision Rounds</li>
+                    <li><i class="fas fa-check"></i> 5-Day Delivery</li>
                 </ul>
-                <a href="#contact" class="btn btn-outline" style="width:100%;">GET STARTED</a>
+                <button class="btn-outline" style="width: 100%;">BOOK NOW</button>
             </div>
             <div class="price-card featured">
-                <div class="popular-badge">MOST POPULAR</div>
-                <h3 class="pricing-name">Growth</h3>
-                <p class="mono" style="font-size:0.8rem;">For scaling fast</p>
-                <div class="price-val" id="price-growth">₹1,999</div>
+                <div class="popular-tag">MOST POPULAR</div>
+                <h3>Studio</h3>
+                <p class="price-tagline">The ultimate content package</p>
+                <div class="price-value">₹2,499</div>
                 <ul class="price-list">
-                    <li><i class="fas fa-check"></i> 4 Platforms</li> 
-                    <li><i class="fas fa-check"></i> 24 Posts / Month</li>
-                    <li><i class="fas fa-check"></i> Short-form Video Editing</li>
-                    <li><i class="fas fa-check"></i> Ad Management</li>
-                    <li><i class="fas fa-check"></i> Weekly Reporting</li>
+                    <li><i class="fas fa-check"></i> 3 Commercial Ads</li>
+                    <li><i class="fas fa-check"></i> 25 Lifestyle Photos</li>
+                    <li><i class="fas fa-check"></i> Aerial Drone Shots</li>
+                    <li><i class="fas fa-check"></i> 48hr Priority Delivery</li>
                 </ul>
-                <a href="#contact" class="btn btn-grad" style="width:100%;">GET STARTED</a>
+                <button class="btn-gradient" style="width: 100%;">BOOK NOW</button>
             </div>
             <div class="price-card">
-                <h3 class="pricing-name">Dominance</h3>
-                <p class="mono" style="font-size:0.8rem;">Full-scale production</p>
-                <div class="price-val" id="price-dominance">₹2,999</div>
+                <h3>Enterprise</h3>
+                <p class="price-tagline">Custom full-scale production</p>
+                <div class="price-value">Custom</div>
                 <ul class="price-list">
-                    <li><i class="fas fa-check"></i> All Platforms</li>
-                    <li><i class="fas fa-check"></i> Daily Content</li>
-                    <li><i class="fas fa-check"></i> Influencer Campaigns</li>
-                    <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
+                    <li><i class="fas fa-check"></i> Unlimited Deliverables</li>
+                    <li><i class="fas fa-check"></i> Full Production Crew</li>
+                    <li><i class="fas fa-check"></i> 8K Cinematic Resolution</li>
+                    <li><i class="fas fa-check"></i> Multi-Location Shoots</li>
                 </ul>
-                <a href="#contact" class="btn btn-outline" style="width:100%;">GET STARTED</a>
+                <button class="btn-outline" style="width: 100%;">CONTACT US</button>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="contact-wrap">
-            <div class="contact-info">
-                <h2 class="hero-title" style="font-size: 2.2rem;">Ready to Own Your Niche?</h2>
-                <p style="color:var(--dim);">Stop guessing and start growing with a strategy backed by millions of data points.</p>
-                <div class="ticker-wrap">
-                    <div class="ticker">
-                        @fashion_co just hit 500k reach • @tech_launch grew 3x in 60 days • @food_hub gained 1.2k followers today •
+    <section id="work">
+        <div class="section-header">
+            <p class="section-tag">OUR WORK</p>
+            <h2 class="section-title gradient-text">Recent Projects</h2>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-item wide tall">
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800" alt="Work 1">
+                <div class="bento-overlay">
+                    <span class="section-tag" style="font-size: 0.6rem;">BRAND FILM</span>
+                    <h3>The Urban Explorer</h3>
+                    <p>Client: Northface</p>
+                </div>
+            </div>
+            <div class="bento-item">
+                <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=400" alt="Work 2">
+                <div class="bento-overlay">
+                    <h3>Summer Vibes</h3>
+                </div>
+            </div>
+            <div class="bento-item tall">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=400" alt="Work 3">
+                <div class="bento-overlay">
+                    <h3>Cinematic Cuts</h3>
+                </div>
+            </div>
+            <div class="bento-item">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=400" alt="Work 4">
+                <div class="bento-overlay">
+                    <h3>Lens Focus</h3>
+                </div>
+            </div>
+            <div class="bento-item wide">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800" alt="Work 5">
+                <div class="bento-overlay">
+                    <h3>Portrait Series</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="book">
+        <div class="inquiry-split">
+            <div class="inquiry-info">
+                <h2 class="hero-title" style="font-size: 2.2rem;">Let's Create Something Extraordinary</h2>
+                <p style="color: var(--text-dim); margin-bottom: 2rem;">Ready to elevate your brand's visual identity? Fill out the form and our creative director will reach out within 24 hours.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-envelope" style="color: var(--cyan);"></i>
+                        <span>hello@xerovamedia.digital</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-phone" style="color: var(--cyan);"></i>
+                        <span>+1 (555) 902-3412</span>
                     </div>
                 </div>
             </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label>BRAND NAME</label>
-                    <input type="text" placeholder="e.g. Xerova Digital">
+
+            <form class="inquiry-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label>FULL NAME</label>
+                        <input type="text" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL ADDRESS</label>
+                        <input type="email" placeholder="john@brand.com">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>PRIMARY GOAL</label>
+                    <label>SERVICE TYPE</label>
                     <select>
-                        <option>Brand Awareness</option>
-                        <option>Sales & Conversions</option>
-                        <option>Community Building</option>
-                        <option>Virality / Growth</option>
+                        <option>Video Production</option>
+                        <option>Photography</option>
+                        <option>Full Media Package</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>BUDGET RANGE</label>
-                    <select>
-                        <option>$1k - $3k /mo</option>
-                        <option>$3k - $7k /mo</option>
-                        <option>$10k+ /mo</option>
-                    </select>
+                    <label>PROJECT BRIEF</label>
+                    <textarea rows="4" placeholder="Tell us about your vision..."></textarea>
                 </div>
-                <button type="submit" class="btn btn-grad" style="width:100%; padding: 1.2rem;">LET'S GROW TOGETHER</button>
+                <button type="submit" class="btn-gradient" style="width: 100%; padding: 1.2rem;">SEND ENQUIRY</button>
             </form>
         </div>
     </section>
 
     <div class="final-cta">
-        <div class="pulse-glow"></div>
-        <h2 class="hero-title" style="font-size: 2.5rem; position: relative; z-index: 1;">Your Audience Is Already Out There.</h2>
-        <p style="margin-bottom: 2rem; position: relative; z-index: 1;">Let's make sure they find you.</p>
-        <a href="#contact" class="btn btn-grad" style="padding: 1.5rem 3rem; position: relative; z-index: 1;">CLAIM YOUR STRATEGY CALL</a>
+        <div class="gradient-mesh"></div>
+        <div style="position: relative; z-index: 1;">
+            <h2 class="hero-title" style="font-size: 2.5rem;">Your Story Deserves to Be Seen.</h2>
+            <a href="media.html" class="btn-gradient" style="padding: 1.5rem 3.5rem; font-size: 1rem;">START YOUR PROJECT</a>
+        </div>
     </div>
 
     <script>
-        // --- Social Graph Animation ---
-        const canvas = document.getElementById('graph-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = '#00f5d4';
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 60; i++) particles.push(new Particle());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
-                p.update();
-                p.draw();
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = p.x - particles[j].x;
-                    const dy = p.y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 245, 212, ${1 - dist / 150})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
+        // Simple Intersection Observer for Process Steps
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
-            requestAnimationFrame(animate);
-        }
-        animate();
+        }, { threshold: 0.2 });
 
-        // --- Pricing Toggle ---
-        const toggle = document.getElementById('price-toggle');
-        const prices = {
-            starter: document.getElementById('price-starter'),
-            growth: document.getElementById('price-growth'),
-            dominance: document.getElementById('price-dominance')
-        };
+        document.querySelectorAll('.process-step').forEach(step => {
+            observer.observe(step);
+        });
 
-        toggle.addEventListener('click', () => {
-            toggle.classList.toggle('active');
-            if (toggle.classList.contains('active')) {
-                prices.starter.innerText = "$1,020";
-                prices.growth.innerText = "$2,125";
-                prices.dominance.innerText = "$4,250";
+        // Sticky Nav Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = "rgba(10, 13, 26, 0.95)";
+                nav.style.padding = "0.8rem 8%";
             } else {
-                prices.starter.innerText = "$1,200";
-                prices.growth.innerText = "$2,500";
-                prices.dominance.innerText = "$5,000";
+                nav.style.background = "rgba(10, 13, 26, 0.85)";
+                nav.style.padding = "1.2rem 8%";
             }
         });
     </script>
